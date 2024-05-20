@@ -1,0 +1,1 @@
+[room number],[Date Reserved (MM/DD/YYYY)],[customer first name],[customer last name],[userEmployeeID (6 digit)]
