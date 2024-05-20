@@ -27,8 +27,6 @@ public class HotelSystem {
 
         //TESTING (delete later)
         accountData = readAccounts(ACCOUNT_FILE);
-
-        //Output all of accountData
         for(int i = 0; i < accountData.length; i++){
             for(int j = 0; j < accountData[i].length; j++){
                 System.out.print(accountData[i][j] + " ");
@@ -38,6 +36,19 @@ public class HotelSystem {
 
     }
 
+    /*
+    Method: readAccounts
+    -----
+    Parameters:
+    String filepath - The filepath of the account file.
+    -----
+    Returns:
+    String[][] data - 2D array that holds all account info.
+    -----
+    Description: This method reads in all employee account data from the file, and
+    then returns it as a 2D array. Each row of the array is a separate employee, and each
+    column contains that employee's info (ID, First Name, Last name, Pin)
+     */
     public static String[][] readAccounts(String filepath) {
 
         //Declarations
@@ -51,8 +62,6 @@ public class HotelSystem {
             for(file = new BufferedReader(new FileReader(filepath)); file.readLine() != null; ++numOfLines) {
                 //ALL THE COUNTING IS DONE IN THE HEADER, NO BODY REQUIRED!
             }
-
-            System.out.println(numOfLines);
 
             //INIT DATA[][] and reset BufferedReader to top of file.
             data = new String[numOfLines][ACCOUNT_ENTRY_LENGTH];
