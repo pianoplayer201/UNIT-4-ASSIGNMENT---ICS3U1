@@ -24,6 +24,18 @@ public class HotelSystem {
         int userID;
         boolean isAdmin = false;
         String [][] roomData, accountData;
+
+        //TESTING (delete later)
+        accountData = readAccounts(ACCOUNT_FILE);
+
+        //Output all of accountData
+        for(int i = 0; i < accountData.length; i++){
+            for(int j = 0; j < accountData[i].length; j++){
+                System.out.print(accountData[i][j] + " ");
+            }
+            System.out.println();
+        }
+
     }
 
     public static String[][] readAccounts(String filepath) {
@@ -37,19 +49,21 @@ public class HotelSystem {
 
             //COUNT NUM OF LINES
             for(file = new BufferedReader(new FileReader(filepath)); file.readLine() != null; ++numOfLines) {
-
+                //ALL THE COUNTING IS DONE IN THE HEADER, NO BODY REQUIRED!
             }
 
             System.out.println(numOfLines);
 
             //INIT DATA[][] and reset BufferedReader to top of file.
             data = new String[numOfLines][ACCOUNT_ENTRY_LENGTH];
+            file.close();
             file = new BufferedReader(new FileReader(filepath));
 
             //Read File, Fill out Data
             for(int i = 0; i < data.length; ++i) {
                 data[i] = file.readLine().split(",");
             }
+            file.close();
 
         }
         catch (IOException e) {
