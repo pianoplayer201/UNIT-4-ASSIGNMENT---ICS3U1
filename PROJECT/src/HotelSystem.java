@@ -170,7 +170,7 @@ public static void searchByName(String[][] roomData){
     last_name = scan.nextLine();
     
     for (int i = 0; i<roomData.length; i++){
-        if((roomData[i][FNAME].equals(first_name.toLowerCase())) && (roomData[i][LNAME].equals(last_name.toLowerCase()))){
+        if(((roomData[i][FNAME].toLowerCase()).equals(first_name.toLowerCase())) && ((roomData[i][LNAME].toLowerCase()).equals(last_name.toLowerCase()))){
           System.out.println("Room #: "+roomData[i][RES_ROOM]);
           System.out.println("Date reserved: "+roomData[i][RES_DATE]);
           System.out.println(); //blank line
