@@ -226,9 +226,7 @@ public class HotelSystem {
             System.out.println(e);
         }
     }
-}
-
-/*
+    /*
 Mansour Abdelsalam
 Method: searchByName
 -----
@@ -242,16 +240,16 @@ Description: Asks user for a first name and last name and then prints out each r
 */
 public static void searchByName(String[][] roomData){
     Scanner scan = new Scanner(System.in);
-    
+
     String first_name = "";
     String last_name = "";
-    
+
     System.out.println("Enter the client's information.");
     System.out.print("First name: ");
     first_name = scan.nextLine();
     System.out.print("Last name: ");
     last_name = scan.nextLine();
-    
+
     for (int i = 0; i<roomData.length; i++){
         if(((roomData[i][FNAME].toLowerCase()).equals(first_name.toLowerCase())) && ((roomData[i][LNAME].toLowerCase()).equals(last_name.toLowerCase()))){
           System.out.println("Room #: "+roomData[i][RES_ROOM]);
@@ -261,121 +259,124 @@ public static void searchByName(String[][] roomData){
     }
 }
 
-/*
-Mansour Abdelsalam
-Method: searchAvailableByDate
------
-Parameters:
-String[][] roomData - 2d array containing room information
------
-Returns:
-void
------
-Description: Asks user for a date in MM/DD/YYYY format (will ask user to reenter if invalid format given) and then print out each available room on that day. 
-Will check if inputted date is between 1 to 31, and month is between 1 to 12.
-*/
-public static void searchAvailableByDate(String[][] roomData){
-    Scanner scan = new Scanner(System.in);
-    
-    boolean valid_date = false;
-    boolean room_found = false;
-    int month = 0;
-    int day = 0;
-    int year = 0;
-    String date = "";
-   
-    System.out.println("Enter the date to check.");
-    do{
-        System.out.print("Month: ");
-        month = scan.nextInt();
-        System.out.print("Day: ");
-        day = scan.nextInt();
-        System.out.print("Year: ");
-        year = scan.nextInt();
-      
-        if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
-            date += ""+month+"/"+day+"/"+year;
-            valid_date = true;
-        } else {
-            System.out.println("Invalid date entered.");
-            System.out.println(); //blank line
-            System.out.println("Reenter date:");
-        }
-    } while(!valid_date);
+    /*
+    Mansour Abdelsalam
+    Method: searchAvailableByDate
+    -----
+    Parameters:
+    String[][] roomData - 2d array containing room information
+    -----
+    Returns:
+    void
+    -----
+    Description: Asks user for a date in MM/DD/YYYY format (will ask user to reenter if invalid format given) and then print out each available room on that day.
+    Will check if inputted date is between 1 to 31, and month is between 1 to 12.
+    */
+    public static void searchAvailableByDate(String[][] roomData){
+        Scanner scan = new Scanner(System.in);
 
-    if(valid_date){
-        System.out.println(); //blank line
-        System.out.println("Available rooms on "+date+":");
-        
-        for(int i = 0; i<roomData.length; i++){
-            if(!roomData[i][RES_DATE].equals(date)){
-                room_found = true;
-                System.out.println("Room #: "+roomData[i][RES_ROOM]);
+        boolean valid_date = false;
+        boolean room_found = false;
+        int month = 0;
+        int day = 0;
+        int year = 0;
+        String date = "";
+
+        System.out.println("Enter the date to check.");
+        do{
+            System.out.print("Month: ");
+            month = scan.nextInt();
+            System.out.print("Day: ");
+            day = scan.nextInt();
+            System.out.print("Year: ");
+            year = scan.nextInt();
+
+            if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
+                date += ""+month+"/"+day+"/"+year;
+                valid_date = true;
+            } else {
+                System.out.println("Invalid date entered.");
+                System.out.println(); //blank line
+                System.out.println("Reenter date:");
             }
-        }
-        if(!room_found){
-            System.out.println("No rooms available on this date.");
-            System.out.println(); //blank line
-        }
-    }
-}
+        } while(!valid_date);
 
-/*
-Mansour Abdelsalam
-Method: searchReservationByDate
------
-Parameters:
-String[][] roomData - 2d array containing room information
------
-Returns:
-void
------
-Description: Asks user for a date in MM/DD/YYYY format (will ask user to reenter if invalid format given) and then print out each reservation on that day, with room number and client information.
-*/
-public static void searchReservationByDate(String[][] roomData){
-    Scanner scan = new Scanner(System.in);
-    
-    boolean valid_date = false;
-    boolean room_found = false;
-    int month = 0;
-    int day = 0;
-    int year = 0;
-    String date = "";
-   
-    System.out.println("Enter the date to check.");
-    do{
-        System.out.print("Month: ");
-        month = scan.nextInt();
-        System.out.print("Day: ");
-        day = scan.nextInt();
-        System.out.print("Year: ");
-        year = scan.nextInt();
-      
-        if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
-            date += ""+month+"/"+day+"/"+year;
-            valid_date = true;
-        } else {
-            System.out.println("Invalid date entered.");
+        if(valid_date){
             System.out.println(); //blank line
-            System.out.println("Reenter date:");
-        }
-    } while(!valid_date);
+            System.out.println("Available rooms on "+date+":");
 
-    if(valid_date){
-        System.out.println(); //blank line
-        System.out.println("Rooms reserved on "+date+":");
-      
-        for(int i = 0; i<roomData.length; i++){
-            if(roomData[i][RES_DATE].equals(date)){
-                room_found = true;
-                System.out.println("Room #: "+roomData[i][RES_ROOM]);
-                System.out.println("Customer name: "+roomData[i][RES_FNAME]+" "+roomData[i][RES_LNAME]);
+            for(int i = 0; i<roomData.length; i++){
+                if(!roomData[i][RES_DATE].equals(date)){
+                    room_found = true;
+                    System.out.println("Room #: "+roomData[i][RES_ROOM]);
+                }
+            }
+            if(!room_found){
+                System.out.println("No rooms available on this date.");
                 System.out.println(); //blank line
             }
         }
-        if(!room_found){
-            System.out.println("No rooms are reserved on this date.");
+    }
+
+    /*
+    Mansour Abdelsalam
+    Method: searchReservationByDate
+    -----
+    Parameters:
+    String[][] roomData - 2d array containing room information
+    -----
+    Returns:
+    void
+    -----
+    Description: Asks user for a date in MM/DD/YYYY format (will ask user to reenter if invalid format given) and then print out each reservation on that day, with room number and client information.
+    */
+    public static void searchReservationByDate(String[][] roomData){
+        Scanner scan = new Scanner(System.in);
+
+        boolean valid_date = false;
+        boolean room_found = false;
+        int month = 0;
+        int day = 0;
+        int year = 0;
+        String date = "";
+
+        System.out.println("Enter the date to check.");
+        do{
+            System.out.print("Month: ");
+            month = scan.nextInt();
+            System.out.print("Day: ");
+            day = scan.nextInt();
+            System.out.print("Year: ");
+            year = scan.nextInt();
+
+            if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
+                date += ""+month+"/"+day+"/"+year;
+                valid_date = true;
+            } else {
+                System.out.println("Invalid date entered.");
+                System.out.println(); //blank line
+                System.out.println("Reenter date:");
+            }
+        } while(!valid_date);
+
+        if(valid_date){
             System.out.println(); //blank line
+            System.out.println("Rooms reserved on "+date+":");
+
+            for(int i = 0; i<roomData.length; i++){
+                if(roomData[i][RES_DATE].equals(date)){
+                    room_found = true;
+                    System.out.println("Room #: "+roomData[i][RES_ROOM]);
+                    System.out.println("Customer name: "+roomData[i][RES_FNAME]+" "+roomData[i][RES_LNAME]);
+                    System.out.println(); //blank line
+                }
+            }
+            if(!room_found){
+                System.out.println("No rooms are reserved on this date.");
+                System.out.println(); //blank line
+            }
         }
     }
 }
+
+
