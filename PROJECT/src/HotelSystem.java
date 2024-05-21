@@ -2,6 +2,8 @@
 djfjsjgsfjkj
 */
 import java.io.*;
+import java.util.Scanner;
+
 public class HotelSystem {
 
     //GLOBAL CONSTANTS
@@ -49,6 +51,7 @@ public class HotelSystem {
     }
 
     /*
+    Programmer: Ryan Mehrian
     Method: readAccounts
     -----
     Parameters:
@@ -96,6 +99,7 @@ public class HotelSystem {
     }
 
     /*
+    Programmer:Ryan Mehrian
     Method: readRoomInfo
     -----
     Parameters:
@@ -143,21 +147,7 @@ public class HotelSystem {
     }
 
     /*
-    Method: userLogout
-    -----
-    Parameters:
-    String reservationPath - The filepath of the reservations file.
-    String accountPath - The filepath of the account file.
-    String[][] reservationData - 2D array that holds all reservation and room info, prepared to be written.
-    String[][] accountData - 2D array that holds all account info, prepared to be written.
-    -----
-    Returns:
-    void
-    -----
-    Description: This method logs the user out of the system by writing all reservation and account data to their
-    respective files. The user should return to the login screen after via the main method.
-    */
-    /*
+    Programmer: Ryan Mehrian
     Method: userLogout
     -----
     Parameters:
@@ -226,38 +216,38 @@ public class HotelSystem {
             System.out.println(e);
         }
     }
-    /*
-Mansour Abdelsalam
-Method: searchByName
------
-Parameters:
-String[][] roomData - 2d array containing room information
------
-Returns:
-void
------
-Description: Asks user for a first name and last name and then prints out each reservation made under that client name, with room number and date information.
-*/
-public static void searchByName(String[][] roomData){
-    Scanner scan = new Scanner(System.in);
+        /*
+    Mansour Abdelsalam
+    Method: searchByName
+    -----
+    Parameters:
+    String[][] roomData - 2d array containing room information
+    -----
+    Returns:
+    void
+    -----
+    Description: Asks user for a first name and last name and then prints out each reservation made under that client name, with room number and date information.
+    */
+    public static void searchByName(String[][] roomData){
+        Scanner scan = new Scanner(System.in);
 
-    String first_name = "";
-    String last_name = "";
+        String first_name = "";
+        String last_name = "";
 
-    System.out.println("Enter the client's information.");
-    System.out.print("First name: ");
-    first_name = scan.nextLine();
-    System.out.print("Last name: ");
-    last_name = scan.nextLine();
+        System.out.println("Enter the client's information.");
+        System.out.print("First name: ");
+        first_name = scan.nextLine();
+        System.out.print("Last name: ");
+        last_name = scan.nextLine();
 
-    for (int i = 0; i<roomData.length; i++){
-        if(((roomData[i][FNAME].toLowerCase()).equals(first_name.toLowerCase())) && ((roomData[i][LNAME].toLowerCase()).equals(last_name.toLowerCase()))){
-          System.out.println("Room #: "+roomData[i][RES_ROOM]);
-          System.out.println("Date reserved: "+roomData[i][RES_DATE]);
-          System.out.println(); //blank line
+        for (int i = 0; i<roomData.length; i++){
+            if(((roomData[i][ACCOUNT_FIRSTNAME_INDEX].toLowerCase()).equals(first_name.toLowerCase())) && ((roomData[i][RES_LNAME].toLowerCase()).equals(last_name.toLowerCase()))){
+              System.out.println("Room #: "+roomData[i][RES_ROOM]);
+              System.out.println("Date reserved: "+roomData[i][RES_DATE]);
+              System.out.println(); //blank line
+            }
         }
     }
-}
 
     /*
     Mansour Abdelsalam
