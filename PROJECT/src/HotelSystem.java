@@ -1,9 +1,7 @@
 /*
 djfjsjgsfjkj
 */
-
 import java.io.*;
-
 public class HotelSystem {
 
     //GLOBAL CONSTANTS
@@ -142,5 +140,90 @@ public class HotelSystem {
         }
 
         return data;
+    }
+
+    /*
+    Method: userLogout
+    -----
+    Parameters:
+    String reservationPath - The filepath of the reservations file.
+    String accountPath - The filepath of the account file.
+    String[][] reservationData - 2D array that holds all reservation and room info, prepared to be written.
+    String[][] accountData - 2D array that holds all account info, prepared to be written.
+    -----
+    Returns:
+    void
+    -----
+    Description: This method logs the user out of the system by writing all reservation and account data to their
+    respective files. The user should return to the login screen after via the main method.
+    */
+    /*
+    Method: userLogout
+    -----
+    Parameters:
+    String reservationPath - The filepath of the reservations file.
+    String accountPath - The filepath of the account file.
+    String[][] reservationData - 2D array that holds all reservation and room info, prepared to be written.
+    String[][] accountData - 2D array that holds all account info, prepared to be written.
+    -----
+    Returns:
+    void
+    -----
+    Description: This method logs the user out of the system by writing all reservation and account data to their
+    respective files. The user should return to the login screen after via the main method.
+    */
+    public static void userLogout(String reservationPath, String accountPath, String[][] reservationData, String[][] accountData) {
+        //Declarations
+        BufferedWriter file;
+
+        //Logging out Message
+        System.out.println("LOGGING OUT...");
+
+        //Write Reservations
+        try {
+            file = new BufferedWriter(new FileWriter(reservationPath));
+
+            for(int i = 0; i < reservationData.length; i++){
+                for(int j = 0; j < RESERVATION_ELEMENT_COUNT; j++){
+                    file.write(reservationData[i][j] + ',');
+                }
+                file.write("\n");
+            }
+            file.close();
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+
+        //Write Account Data
+        try {
+            file = new BufferedWriter(new FileWriter(reservationPath));
+
+            for(int i = 0; i < reservationData.length; i++){
+                for(int j = 0; j < RESERVATION_ELEMENT_COUNT; j++){
+                    file.write(reservationData[i][j] + ',');
+                }
+                file.write("\n");
+            }
+            file.close();
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+        //Write Reservations
+        try {
+            file = new BufferedWriter(new FileWriter(accountPath));
+
+            for(int i = 0; i < accountData.length; i++){
+                for(int j = 0; j < ACCOUNT_ELEMENT_COUNT; j++){
+                    file.write(accountData[i][j] + ',');
+                }
+                file.write("\n");
+            }
+            file.close();
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
     }
 }
