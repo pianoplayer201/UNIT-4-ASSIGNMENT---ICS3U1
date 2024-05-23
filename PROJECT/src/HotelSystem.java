@@ -706,6 +706,74 @@ public class HotelSystem {
             return roomData;
         }
     }
+    /*
+    Programmer: Noah Hur
+    Method: makeRoom
+    -----
+    Parameters:
+    String[][] roomData
+    -----
+    Returns:
+    String[][] makeRoom
+    -----
+    Description: Only available to the admin. Will search through roomData and will ask to re-enter room number if already available. 
+    If not available, creates a new temp array that is one index larger than roomData[], fills it with the new reservation, and then assigns that temp array to roomData[]. 
+    The method will also check for invalid input and loop until valid input is entered.
+    */
+
+    public static String[][] makeRoom(String[][] roomData)
+  {
+    Scanner sc = new Scanner(System.in);
+    String newRoom; 
+    boolean roomVerify = true;
+    String[][] temp_roomData; 
+    
+    System.out.print("Enter new room number: "); 
+    newRoom = sc.nextLine(); 
+    
+    for (int i = 0; i <= roomData.length - 1; i++)
+    {
+      if (newRoom.equals(roomData[i][0]))
+      {
+        roomVerify = false; 
+      }
+    }
+    while (roomVerify == false)
+    {
+      roomVerify = true; 
+      System.out.print("room number already exists, enter new room number: ");
+      newRoom = sc.nextLine(); 
+      for (int i = 0; i <= roomData.length - 1; i++)
+      {
+        if (newRoom.equals(roomData[i][0]))
+        {
+          roomVerify = false; 
+        }
+      }
+    }
+    
+    temp_roomData = new String [roomData.length + 1][5];
+    
+    for (int i = 0; i <= roomData.length - 1; i++)
+    {
+      for (int ii = 0;ii <= 4; ii++)
+      {
+        temp_roomData[i][ii] = roomData[i][ii];
+      }
+    }
+    
+    temp_roomData[temp_roomData.length - 1][0] = newRoom; 
+      
+    for (int i = 1; i <= 4; i++)
+    {
+      temp_roomData[temp_roomData.length - 1][i] = "-1";
+    }
+    
+    System.out.println("new room: " + newRoom + ", created"); 
+    
+    return temp_roomData; 
+  }
+}
 }
 
 
