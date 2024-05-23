@@ -367,6 +367,20 @@ public class HotelSystem {
         }
         
     }
+     /*
+    Programmer: Noah Hur
+    Method: userLogin
+    -----
+    Parameters:
+    String accountData - array that stores data of all the accounts.    
+    -----
+    Returns:
+    int userID 
+    -----
+    Description: Prompts a user for their ID, and then their PIN. If ID is invalid then will ask to re-enter user ID.
+    If they enter 0 as a PIN, it will prompt for a different ID. If they enter an invalid pin, it will tell them to 
+    re-enter a pin. If all correct, userID is returned and moves to reservationMenu().
+     */
 
     public static int userLogin(String[][] accountData){
         Scanner sc = new Scanner(System.in);
