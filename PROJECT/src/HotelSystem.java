@@ -368,55 +368,53 @@ public class HotelSystem {
         
     }
 
-    public static int userLogin(String[][] accountData)
-  {
-    Scanner sc = new Scanner(System.in); 
-    int userID; 
-    boolean userVerify; 
-    int userPin;
-    int accountIndex = 0; 
-    
-    do
-    {  
-    userVerify = false;
-    System.out.print("Enter ID: "); 
-    userID = sc.nextInt();
-    for (int i = 0; i <= accountData.length - 1; i++)
-    {
-      if (Integer.parseInt(accountData[i][0]) == (userID)) 
-      {
-        userVerify = true;
-        accountIndex += i; 
-      }
-    }
-    while (userVerify == false)
-    {
-      System.out.print("Invalid ID entered, enter new ID: ");
-      userID = sc.nextInt(); 
-      
-      for (int i = 0; i <= accountData.length - 1; i++)
-      {
-        if (Integer.parseInt(accountData[i][0]) == (userID)) 
-        {
-          userVerify = true;
-          accountIndex += i;
-        }
-      }
-    }
-    
-      System.out.print("enter pin: "); 
-      userPin = sc.nextInt(); 
-      
-      while (Integer.parseInt(accountData[accountIndex][3]) != (userPin) && userPin != 0)
-      {
-        System.out.print("Incorrect pin entered, enter new pin: "); 
-        userPin = sc.nextInt();
-      }
-    } while (userPin == 0);  
+    public static int userLogin(String[][] accountData){
+        Scanner sc = new Scanner(System.in);
+        int userID;
+        boolean userVerify;
+        int userPin;
+        int accountIndex = 0;
 
-    return userID; 
-  }
-}
+        do
+        {
+            userVerify = false;
+            System.out.print("Enter ID: ");
+            userID = sc.nextInt();
+            for (int i = 0; i <= accountData.length - 1; i++)
+            {
+                  if (Integer.parseInt(accountData[i][0]) == (userID))
+                  {
+                    userVerify = true;
+                    accountIndex += i;
+                  }
+            }
+            while (userVerify == false)
+            {
+                  System.out.print("Invalid ID entered, enter new ID: ");
+                  userID = sc.nextInt();
+
+                  for (int i = 0; i <= accountData.length - 1; i++)
+                  {
+                    if (Integer.parseInt(accountData[i][0]) == (userID))
+                    {
+                      userVerify = true;
+                      accountIndex += i;
+                    }
+                  }
+            }
+
+              System.out.print("enter pin: ");
+              userPin = sc.nextInt();
+
+              while (Integer.parseInt(accountData[accountIndex][3]) != (userPin) && userPin != 0)
+              {
+                System.out.print("Incorrect pin entered, enter new pin: ");
+                userPin = sc.nextInt();
+              }
+        } while (userPin == 0);
+
+        return userID;
+    }
 }
 
 
