@@ -148,7 +148,7 @@ public class HotelSystem {
 
     /*
     Programmer: Ryan Mehrian
-    Method: userLogout
+    Method: writeFile
     -----
     Parameters:
     String reservationPath - The filepath of the reservations file.
@@ -159,15 +159,14 @@ public class HotelSystem {
     Returns:
     void
     -----
-    Description: This method logs the user out of the system by writing all reservation and account data to their
-    respective files. The user should return to the login screen after via the main method.
+    Description: This method writes all data back to the files.
     */
-    public static void userLogout(String reservationPath, String accountPath, String[][] reservationData, String[][] accountData) {
+    public static void writeFile(String reservationPath, String accountPath, String[][] reservationData, String[][] accountData) {
         //Declarations
         BufferedWriter file;
 
         //Logging out Message
-        System.out.println("LOGGING OUT...");
+        System.out.println("SAVING DATA...");
 
         //Write Reservations
         try {
