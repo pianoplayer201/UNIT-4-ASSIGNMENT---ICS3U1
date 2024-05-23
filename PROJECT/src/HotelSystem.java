@@ -210,6 +210,7 @@ public class HotelSystem {
             System.out.println(e);
         }
     }
+<<<<<<< HEAD
 
     /*
 Mansour Abdelsalam
@@ -224,6 +225,21 @@ void
 Description: Asks user for a first name and last name and then prints out each reservation made under that client name, with room number and date information.
 */
     public static void searchByName(String[][] roomData) {
+=======
+    /*
+    Programmer: Mansour Abdelsalam
+    Method: searchByName
+    -----
+    Parameters:
+    String[][] roomData - 2d array containing room information
+    -----
+    Returns:
+    void
+    -----
+    Description: Asks user for a first name and last name and then prints out each reservation made under that client name, with room number and date information.
+    */
+    public static void searchByName(String[][] roomData){
+>>>>>>> 59ca26f6f649c98323b004477eb9ca18a4cb4d9c
         Scanner scan = new Scanner(System.in);
 
         String first_name = "";
@@ -304,7 +320,7 @@ Description: Asks user for a first name and last name and then prints out each r
     }
 
     /*
-    Mansour Abdelsalam
+    Programmer: Mansour Abdelsalam
     Method: searchReservationByDate
     -----
     Parameters:
@@ -406,6 +422,7 @@ Description: Asks user for a first name and last name and then prints out each r
     }
 
     /*
+<<<<<<< HEAD
 Programmer: Ryan Mehrian
 Method: addEmployee
 ----
@@ -420,6 +437,22 @@ Only available to the admin. Creates a new temp array that is one index larger t
 array with every room besides the removed one, and then returns the array.
  */
     public static String[][] addEmployee(String[][] accountData) {
+=======
+    Programmer: Ryan Mehrian
+    Method: addEmployee
+    ----
+    Parameters:
+    String[][] accountData - 2D Array with all employee account info.
+    ----
+    Returns:
+    updatedData[][] - 2D Array that holds accountData but updated.
+    ----
+    Description:
+    Only available to the admin. Creates a new temp array that is one index larger than accountData[], fills the new
+    array with every room besides the removed one, and then returns the array.
+     */
+    public static String[][] addEmployee(String[][] accountData){
+>>>>>>> 59ca26f6f649c98323b004477eb9ca18a4cb4d9c
         //Declarations
         final int VALID_ID_LENGTH = 6;
         String input = null;
@@ -590,6 +623,10 @@ array with every room besides the removed one, and then returns the array.
     }
 
     /*
+<<<<<<< HEAD
+=======
+    Programmer: Mansour Abdelsalam
+>>>>>>> 59ca26f6f649c98323b004477eb9ca18a4cb4d9c
     Method: makeReservation
     -----
     Parameters:
@@ -691,6 +728,74 @@ array with every room besides the removed one, and then returns the array.
             return roomData;
         }
     }
+    /*
+    Programmer: Noah Hur
+    Method: makeRoom
+    -----
+    Parameters:
+    String[][] roomData
+    -----
+    Returns:
+    String[][] makeRoom
+    -----
+    Description: Only available to the admin. Will search through roomData and will ask to re-enter room number if already available. 
+    If not available, creates a new temp array that is one index larger than roomData[], fills it with the new reservation, and then assigns that temp array to roomData[]. 
+    The method will also check for invalid input and loop until valid input is entered.
+    */
+
+    public static String[][] makeRoom(String[][] roomData)
+  {
+    Scanner sc = new Scanner(System.in);
+    String newRoom; 
+    boolean roomVerify = true;
+    String[][] temp_roomData; 
+    
+    System.out.print("Enter new room number: "); 
+    newRoom = sc.nextLine(); 
+    
+    for (int i = 0; i <= roomData.length - 1; i++)
+    {
+      if (newRoom.equals(roomData[i][0]))
+      {
+        roomVerify = false; 
+      }
+    }
+    while (roomVerify == false)
+    {
+      roomVerify = true; 
+      System.out.print("room number already exists, enter new room number: ");
+      newRoom = sc.nextLine(); 
+      for (int i = 0; i <= roomData.length - 1; i++)
+      {
+        if (newRoom.equals(roomData[i][0]))
+        {
+          roomVerify = false; 
+        }
+      }
+    }
+    
+    temp_roomData = new String [roomData.length + 1][5];
+    
+    for (int i = 0; i <= roomData.length - 1; i++)
+    {
+      for (int ii = 0;ii <= 4; ii++)
+      {
+        temp_roomData[i][ii] = roomData[i][ii];
+      }
+    }
+    
+    temp_roomData[temp_roomData.length - 1][0] = newRoom; 
+      
+    for (int i = 1; i <= 4; i++)
+    {
+      temp_roomData[temp_roomData.length - 1][i] = "-1";
+    }
+    
+    System.out.println("new room: " + newRoom + ", created"); 
+    
+    return temp_roomData; 
+  }
+}
 }
 
 
