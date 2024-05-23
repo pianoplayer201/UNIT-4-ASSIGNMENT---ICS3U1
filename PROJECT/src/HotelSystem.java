@@ -215,8 +215,8 @@ public class HotelSystem {
             System.out.println(e);
         }
     }
-        /*
-    Mansour Abdelsalam
+    /*
+    Programmer: Mansour Abdelsalam
     Method: searchByName
     -----
     Parameters:
@@ -249,7 +249,7 @@ public class HotelSystem {
     }
 
     /*
-    Mansour Abdelsalam
+    Programmer: Mansour Abdelsalam
     Method: searchAvailableByDate
     -----
     Parameters:
@@ -308,7 +308,7 @@ public class HotelSystem {
     }
 
     /*
-    Mansour Abdelsalam
+    Programmer: Mansour Abdelsalam
     Method: searchReservationByDate
     -----
     Parameters:
@@ -428,6 +428,108 @@ public class HotelSystem {
         } while (userPin == 0);
 
         return userID;
+    }
+
+    /*
+    Method: makeReservation
+    -----
+    Parameters:
+    String[][] roomData - 2d array containing room information
+    int userID - the user id of the employee making the reservation
+    -----
+    Returns:
+    String[][] temp_array - the temporary array made used to make edits roomData
+    -----
+    Description: Prompts the user for a room number and a date. If the room is available at the date, prompt the user for a clientele first and last name. 
+    The userID of the employee who made the reservation is saved. Will check if inputted date is between 1 to 31, and month is between 1 to 12. 
+    If a reservation is made for a room that already has a reservation on that date, it informs the user that the reservation cannot be made.
+    */
+    public static String[][] makeReservation(String[][] roomData, int userID){
+        Scanner scan = new Scanner(System.in);
+     
+        boolean valid_date = false;
+        boolean room_taken = false;
+        String[][] temp_array;
+        int room_num = 0;
+        int month = 0;
+        int day = 0;
+        int year = 0;
+        String date = "";
+        String first_name = "";
+        String last_name = "";
+        String employee_id = "";
+
+        System.out.println("Enter room number to be reserved.");
+        System.out.print("Room #: ");
+        room_num = scan.nextInt();
+        System.out.println(); //blank line
+    
+        System.out.println("Enter the date to reserve.");
+        do{
+            System.out.print("Month: ");
+            month = scan.nextInt();
+            System.out.print("Day: ");
+            day = scan.nextInt();
+            System.out.print("Year: ");
+            year = scan.nextInt();
+    
+            if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
+                date += ""+month+"/"+day+"/"+year;
+                valid_date = true;
+            } else {
+                System.out.println("Invalid date entered.");
+                System.out.println(); //blank line
+                System.out.println("Reenter date:");
+            }
+        } while(!valid_date);
+        System.out.println(); //blank line
+        scan.nextLine(); //get rid of new line in input stream
+    
+        for(int i = 0; i<roomData.length; i++){
+            if(room_num == Integer.parseInt(roomData[i][RES_ROOM])){
+                if(date.equals(roomData[i][DATE])){
+                    room_taken = true;
+                    System.out.println("This room cannot be booked on this date.");
+                    System.out.printf("Customer %s %s has booked already Room No. %s for the date %s.\n",roomData[i][RES_FNAME],roomData[i][RES_LNAME],roomData[i][RES_ROOM],roomData[i][RES_DATE]);
+                    System.out.println(); //blank line
+                }
+            }
+        }
+
+        if (!room_taken) {
+            System.out.println("Enter the client's information.");
+            System.out.print("First name: ");
+            first_name = scan.nextLine();
+            System.out.print("Last name: ");
+            last_name = scan.nextLine();
+            System.out.println(); //blank line
+
+            employee_id = String.format("%06d", userID);
+            System.out.println("Your user ID is: "+employee_id);
+            System.out.println(); //blank line
+
+            temp_array = new String[roomData.length+1][RES_DATA];
+            for(int i = 0; i<roomData.length; i++){
+                for(int j = 0; j<RES_DATA; j++){
+                    temp_array[i][j] = roomData[i][j];
+                }
+            }
+            temp_array[temp_array.length-1][RE_ROOM] = String.valueOf(room_num);
+            temp_array[temp_array.length-1][RES_DATE] = date;
+            temp_array[temp_array.length-1][RES_FNAME] = first_name;
+            temp_array[temp_array.length-1][RES_LNAME] = last_name;
+            temp_array[temp_array.length-1][RES_EMPL_ID] = employee_id;
+    
+            System.out.println("Reservation made:");
+            for(int i = 0; i<roomData.length; i++){
+                System.out.println(roomData[roomData.length-1][i]);
+            }
+            System.out.println(); //blank line
+    
+            return temp_array;
+        } else {
+            return roomData;
+        }
     }
 }
 
