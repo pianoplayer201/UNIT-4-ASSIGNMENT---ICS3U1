@@ -55,7 +55,7 @@ public class HotelSystem {
     Method: readAccounts
     -----
     Parameters:
-    String filepath - The filepath of the account file.    
+    String filepath - The filepath of the account file.
     -----
     Returns:
     String[][] data - 2D array that holds all account info.
@@ -252,7 +252,7 @@ Description: Asks user for a first name and last name and then prints out each r
         last_name = scan.nextLine();
 
         for (int i = 0; i < roomData.length; i++) {
-            if (((roomData[i][ACCOUNT_FIRSTNAME_INDEX].toLowerCase()).equals(first_name.toLowerCase())) && ((roomData[i][RES_LNAME].toLowerCase()).equals(last_name.toLowerCase()))) {
+            if (((roomData[i][ACCOUNT_FIRSTNAME_INDEX]).equalsIgnoreCase(first_name)) && ((roomData[i][RES_LNAME]).equalsIgnoreCase(last_name))) {
                 System.out.println("Room #: " + roomData[i][RES_ROOM]);
                 System.out.println("Date reserved: " + roomData[i][RES_DATE]);
                 System.out.println(); //blank line
@@ -293,7 +293,7 @@ Description: Asks user for a first name and last name and then prints out each r
             year = scan.nextInt();
 
             if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))) {
-                date += "" + month + "/" + day + "/" + year;
+                date += month + "/" + day + "/" + year;
                 valid_date = true;
             } else {
                 System.out.println("Invalid date entered.");
@@ -351,7 +351,7 @@ Description: Asks user for a first name and last name and then prints out each r
             year = scan.nextInt();
 
             if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))) {
-                date += "" + month + "/" + day + "/" + year;
+                date += month + "/" + day + "/" + year;
                 valid_date = true;
             } else {
                 System.out.println("Invalid date entered.");
@@ -397,7 +397,7 @@ Description: Asks user for a first name and last name and then prints out each r
                     accountIndex += i;
                 }
             }
-            while (userVerify == false) {
+            while (!userVerify) {
                 System.out.print("Invalid ID entered, enter new ID: ");
                 userID = sc.nextInt();
 
@@ -497,9 +497,7 @@ array with every room besides the removed one, and then returns the array.
         //Copy accountData to temp
         if (!quit) {
             for (int i = 0; i < accountData.length; i++) {
-                for (int j = 0; j < ACCOUNT_ELEMENT_COUNT; j++) {
-                    updatedData[i][j] = accountData[i][j];
-                }
+                System.arraycopy(accountData[i], 0, updatedData[i], 0, ACCOUNT_ELEMENT_COUNT);
             }
         } else {
             updatedData = accountData;
@@ -603,13 +601,9 @@ array with every room besides the removed one, and then returns the array.
                 if (accountData[i][ACCOUNT_ID_INDEX].equals(DELETE_FLAG)) {
                     deletePass = true;
                 } else if (deletePass) {
-                    for (int j = 0; j < ACCOUNT_ELEMENT_COUNT; j++) {
-                        updatedData[i - 1][j] = accountData[i][j];
-                    }
+                    System.arraycopy(accountData[i], 0, updatedData[i - 1], 0, ACCOUNT_ELEMENT_COUNT);
                 } else {
-                    for (int j = 0; j < ACCOUNT_ELEMENT_COUNT; j++) {
-                        updatedData[i][j] = accountData[i][j];
-                    }
+                    System.arraycopy(accountData[i], 0, updatedData[i], 0, ACCOUNT_ELEMENT_COUNT);
                 }
             }
         } else {
@@ -670,7 +664,7 @@ array with every room besides the removed one, and then returns the array.
             year = scan.nextInt();
 
             if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))) {
-                date += "" + month + "/" + day + "/" + year;
+                date += month + "/" + day + "/" + year;
                 valid_date = true;
             } else {
                 System.out.println("Invalid date entered.");
@@ -706,9 +700,7 @@ array with every room besides the removed one, and then returns the array.
 
             temp_array = new String[roomData.length + 1][RESERVATION_ELEMENT_COUNT];
             for (int i = 0; i < roomData.length; i++) {
-                for (int j = 0; j < RESERVATION_ELEMENT_COUNT; j++) {
-                    temp_array[i][j] = roomData[i][j];
-                }
+                System.arraycopy(roomData[i], 0, temp_array[i], 0, RESERVATION_ELEMENT_COUNT);
             }
             temp_array[temp_array.length - 1][RES_ROOM] = String.valueOf(room_num);
             temp_array[temp_array.length - 1][RES_DATE] = date;
@@ -723,7 +715,7 @@ array with every room besides the removed one, and then returns the array.
             System.out.println(); //blank line
 
             return temp_array;
-            
+
         } else {
             return roomData;
         }
