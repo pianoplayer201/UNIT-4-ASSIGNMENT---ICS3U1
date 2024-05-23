@@ -215,8 +215,8 @@ public class HotelSystem {
             System.out.println(e);
         }
     }
-        /*
-    Mansour Abdelsalam
+    /*
+    Programmer: Mansour Abdelsalam
     Method: searchByName
     -----
     Parameters:
@@ -308,7 +308,7 @@ public class HotelSystem {
     }
 
     /*
-    Mansour Abdelsalam
+    Programmer: Mansour Abdelsalam
     Method: searchReservationByDate
     -----
     Parameters:
@@ -416,7 +416,7 @@ public class HotelSystem {
         return userID;
     }
 
-        /*
+    /*
     Programmer: Ryan Mehrian
     Method: addEmployee
     ----
@@ -604,7 +604,8 @@ public class HotelSystem {
         return updatedData;
     }
 
-        /*
+    /*
+    Programmer: Mansour Abdelsalam
     Method: makeReservation
     -----
     Parameters:
