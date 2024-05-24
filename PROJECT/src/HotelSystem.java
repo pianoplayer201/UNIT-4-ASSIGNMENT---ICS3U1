@@ -2,6 +2,7 @@
 djfjsjgsfjkj
 */
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HotelSystem {
@@ -24,29 +25,96 @@ public class HotelSystem {
         //CONSTANTS
         final String ACCOUNT_FILE = "account.txt";
         final String RESERVATION_FILE = "reservation.txt";
+        final int ADMIN_ID = 000000;
 
         //Variables
         int userID;
+        boolean loggedIn = false;
         boolean isAdmin = false;
         String[][] roomData, accountData;
 
-        //TESTING (delete later)
-        accountData = readAccounts(ACCOUNT_FILE);
-        roomData = readRoomInfo(RESERVATION_FILE);
+        //MAIN WHILE LOOP
+        while(true){
+            //Read in Data
+            accountData = readAccounts(ACCOUNT_FILE);
+            roomData = readRoomInfo(RESERVATION_FILE);
 
-        for (int i = 0; i < accountData.length; i++) {
-            for (int j = 0; j < accountData[i].length; j++) {
-                System.out.print(accountData[i][j] + " ");
+            //Login
+            userID = userLogin(accountData);
+            loggedIn = true;
+            if(userID == ADMIN_ID);{
+                isAdmin = true;
             }
-            System.out.println();
-        }
-        for (int i = 0; i < roomData.length; i++) {
-            for (int j = 0; j < roomData[i].length; j++) {
-                System.out.print(roomData[i][j] + " ");
+
+            //Logged in Menus
+            while(loggedIn){
+                int selection = reservationMenu(accountData, roomData, userID, isAdmin);
+                switch(selection){
+                    case 0:
+                        //LOGOUT
+                        loggedIn = false;
+                        break;
+                    case 1:
+                        //SEARCH AVAILABLE RESERVATIONS BY DATE
+                        searchAvailableByDate(roomData);
+                        break;
+                    case 2:
+                        //SEARCH BOOKED ROOMS BY NAME
+                        searchReservationByDate(roomData);
+                        break;
+                    case 3:
+                        //SEARCH BOOKED ROOMS BY NAME
+                        searchByName(roomData);
+                        break;
+                    case 4:
+                        //MAKE RESERVATION
+                        roomData = makeReservation(roomData, userID);
+                        break;
+                    case 5:
+                        //CANCEL A RESERVATION
+                        //NOT IMPLEMENETED YET!!!
+                        System.out.println("NOT IMPLEMENTED YET");
+                        break;
+                    case 6:
+                        //Change the Reservation
+                        System.out.println("NOT YET IMPLEMENTED");
+                        break;
+                    case 7:
+                        //CHANGE THE PIN
+                        //changePin(accountData, userID);
+                        break;
+                    case 8:
+                        //Add Employee
+                        if(isAdmin){
+                            accountData = addEmployee(accountData);
+                        }
+                        break;
+                    case 9:
+                        //Delete Employee
+                        if(isAdmin){
+                            accountData = deleteEmployee(accountData);
+                        }
+                        break;
+                    case 10:
+                        //Make Rooms
+                        if(isAdmin){
+                            roomData = makeRoom(roomData);
+                        }
+                        break;
+                    case 11:
+                        //Delete Rooms
+                        if(isAdmin){
+                            //NOT YET IMPLEMENTED
+                            System.out.println("NOT YET IMPLEMENTED");
+                        }
+                        break;
+                }
             }
-            System.out.println();
+
+            //Logout & WriteFile
+            writeFile(RESERVATION_FILE, ACCOUNT_FILE, roomData, accountData);
+
         }
-        //END TESTING
 
     }
 
@@ -750,6 +818,86 @@ public class HotelSystem {
     System.out.println("new room: " + newRoom + ", created");
 
     return temp_roomData;
+    }
+
+    /*
+    Programmer: Ryan Mehrian
+    Method: reservationMenu
+    ----
+    Parameters:
+    String[][] accountData - 2D Array with all employee account info.
+    String[][] roomData - 2D Array with all room & reservation info.
+    int userID - The ID of the user logged in.
+    boolean isAdmin - If the user logged in is Admin.
+    ----
+    Returns:
+    int selectionOption
+    -----
+    This program prompts the user with a menu of options for the reservation system, and then tells main
+    to call the relevant submenu based on the user's choice (returns the choice).
+    */
+    public static int reservationMenu(String[][] accountData, String[][] roomData, int userID, boolean isAdmin){
+        //Declarations
+        int selectionOption = 0;
+        String userName = "";
+        boolean inputValid = false;
+        Scanner sc = new Scanner(System.in);
+
+        //Find Username
+        for(int i = 0; i < accountData.length; i++) {
+            if (Integer.parseInt(accountData[i][ACCOUNT_ID_INDEX]) == userID) {
+                userName = accountData[i][ACCOUNT_FIRSTNAME_INDEX];
+            }
+        }
+
+        //List Options, Input and Validation
+        while(!inputValid){
+            System.out.printf("WELCOME %s, what would you like to do today?\n", userName);
+
+            //DEFAULT OPTIONS
+            System.out.print("1. Search for Available Rooms by Date\n" +
+                    "2. Search for Reservations by Date\n" +
+                    "3. Search for Reservations by Name\n" +
+                    "4. Make a Reservation\n" +
+                    "5. Cancel a Reservation\n" +
+                    "6. Change a Reservation\n" +
+                    "7. Change your Pin Number\n");
+            //ADMIN OPTIONS
+            if(isAdmin){
+                System.out.print("8. Add an Employee\n" +
+                        "9. Delete an Employee\n" +
+                        "10. Add a Room\n" +
+                        "11. Delete a Room\n");
+            }
+            //Logout Option
+            System.out.print("0. Logout\n > ");
+
+            //INPUT and Validation
+            try {
+                selectionOption = sc.nextInt();
+                sc.nextLine();
+                if(isAdmin){
+                    if(selectionOption >= 0 && selectionOption <= 11){
+                        inputValid = true;
+                    }
+                }
+                else {
+                    if(selectionOption >= 0 && selectionOption <= 7){
+                        inputValid = true;
+                    }
+                    else{
+                        inputValid = false;
+                        System.out.println("INVALID OPTION");
+                    }
+                }
+            } catch (InputMismatchException e){
+                System.out.println("INPUT MUST BE A NUMBER");
+            }
+
+
+        }
+        //Return the selected option as an int.
+        return selectionOption;
     }
 }
 
