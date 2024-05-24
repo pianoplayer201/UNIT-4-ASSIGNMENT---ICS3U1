@@ -951,8 +951,8 @@ public class HotelSystem {
         scan.nextLine(); //get rid of new line in input stream
 
         for(int i = 0; i<roomData.length; i++){
-            if(room_num == Integer.parseInt(roomData[i][ROOM])){
-                if(date.equals(roomData[i][DATE])){
+            if(room_num == Integer.parseInt(roomData[i][RES_ROOM])){
+                if(date.equals(roomData[i][RES_DATE])){
                     valid_reservation = true;
                     System.out.printf("Customer %s %s has booked Room No. %s for the date %s.\n",roomData[i][FNAME],roomData[i][LNAME],roomData[i][ROOM],roomData[i][DATE]);
                     System.out.println(); //blank line
@@ -961,9 +961,9 @@ public class HotelSystem {
         }
 
         if (valid_reservation) {
-            temp_array = new String[roomData.length-1][RES_DATA];
+            temp_array = new String[roomData.length-1][RESERVATION_ELEMENT_COUNT];
             for(int i = 0; i<roomData.length-1; i++){
-                for(int j = 0; j<RES_DATA; j++){
+                for(int j = 0; j<RESERVATION_ELEMENT_COUNT; j++){
                     temp_array[i][j] = roomData[i][j];
                 }
             }
