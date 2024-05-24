@@ -72,8 +72,7 @@ public class HotelSystem {
                         break;
                     case 5:
                         //CANCEL A RESERVATION
-                        //NOT IMPLEMENETED YET!!!
-                        System.out.println("NOT IMPLEMENTED YET");
+                        roomData = deleteReservation(roomData, userID);
                         break;
                     case 6:
                         //Change the Reservation
@@ -898,6 +897,85 @@ public class HotelSystem {
         }
         //Return the selected option as an int.
         return selectionOption;
+    }
+
+    /*
+    Programmer: Mansour
+    Method: deleteReservation
+    -----
+    Parameters:
+    String[][] roomData - 2d array containing room information
+    int userID - the user id of the employee making the reservation
+    -----
+    Returns:
+    String[][] temp_array - the temporary array made used to make edits roomData
+    -----
+    Description: Asks the user for a room number and edits all elements for that room’s roomData other than room number to be -1 (null value).
+    */
+    public static String[][] deleteReservation(String[][] roomData, int userID){
+        Scanner scan = new Scanner(System.in);
+
+        boolean valid_date = false;
+        boolean valid_reservation = false;
+        String[][] temp_array;
+        int room_num = 0;
+        int month = 0;
+        int day = 0;
+        int year = 0;
+        String date = "";
+
+        System.out.println("Enter the room number of the reservation to be deleted.");
+        System.out.print("Room #: ");
+        room_num = scan.nextInt();
+        System.out.println(); //blank line
+
+        System.out.println("Enter the date of the reservation to be deleted.");
+        do{
+            System.out.print("Month: ");
+            month = scan.nextInt();
+            System.out.print("Day: ");
+            day = scan.nextInt();
+            System.out.print("Year: ");
+            year = scan.nextInt();
+
+            if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
+                date += ""+month+"/"+day+"/"+year;
+                valid_date = true;
+            } else {
+                System.out.println("Invalid date entered.");
+                System.out.println(); //blank line
+                System.out.println("Reenter date:");
+            }
+        } while(!valid_date);
+        System.out.println(); //blank line
+        scan.nextLine(); //get rid of new line in input stream
+
+        for(int i = 0; i<roomData.length; i++){
+            if(room_num == Integer.parseInt(roomData[i][ROOM])){
+                if(date.equals(roomData[i][DATE])){
+                    valid_reservation = true;
+                    System.out.printf("Customer %s %s has booked Room No. %s for the date %s.\n",roomData[i][FNAME],roomData[i][LNAME],roomData[i][ROOM],roomData[i][DATE]);
+                    System.out.println(); //blank line
+                }
+            }
+        }
+
+        if (valid_reservation) {
+            temp_array = new String[roomData.length-1][RES_DATA];
+            for(int i = 0; i<roomData.length-1; i++){
+                for(int j = 0; j<RES_DATA; j++){
+                    temp_array[i][j] = roomData[i][j];
+                }
+            }
+
+            System.out.println("Reservation deleted.");
+            System.out.println(); //blank line
+
+            return temp_array;
+        } else {
+            System.out.println("No reservation found for this room number and date.");
+            return roomData;
+        }
     }
 }
 
