@@ -700,38 +700,38 @@ public class HotelSystem {
     */
 
     public static String[][] makeRoom(String[][] roomData)
-  {
+    {
     Scanner sc = new Scanner(System.in);
-    String newRoom; 
+    String newRoom;
     boolean roomVerify = true;
-    String[][] temp_roomData; 
-    
-    System.out.print("Enter new room number: "); 
-    newRoom = sc.nextLine(); 
-    
+    String[][] temp_roomData;
+
+    System.out.print("Enter new room number: ");
+    newRoom = sc.nextLine();
+
     for (int i = 0; i <= roomData.length - 1; i++)
     {
       if (newRoom.equals(roomData[i][0]))
       {
-        roomVerify = false; 
+        roomVerify = false;
       }
     }
     while (roomVerify == false)
     {
-      roomVerify = true; 
+      roomVerify = true;
       System.out.print("room number already exists, enter new room number: ");
-      newRoom = sc.nextLine(); 
+      newRoom = sc.nextLine();
       for (int i = 0; i <= roomData.length - 1; i++)
       {
         if (newRoom.equals(roomData[i][0]))
         {
-          roomVerify = false; 
+          roomVerify = false;
         }
       }
     }
-    
+
     temp_roomData = new String [roomData.length + 1][5];
-    
+
     for (int i = 0; i <= roomData.length - 1; i++)
     {
       for (int ii = 0;ii <= 4; ii++)
@@ -739,18 +739,18 @@ public class HotelSystem {
         temp_roomData[i][ii] = roomData[i][ii];
       }
     }
-    
-    temp_roomData[temp_roomData.length - 1][0] = newRoom; 
-      
+
+    temp_roomData[temp_roomData.length - 1][0] = newRoom;
+
     for (int i = 1; i <= 4; i++)
     {
       temp_roomData[temp_roomData.length - 1][i] = "-1";
     }
-    
-    System.out.println("new room: " + newRoom + ", created"); 
-    
-    return temp_roomData; 
-  }
+
+    System.out.println("new room: " + newRoom + ", created");
+
+    return temp_roomData;
+    }
 }
 
 
