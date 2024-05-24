@@ -210,24 +210,8 @@ public class HotelSystem {
             System.out.println(e);
         }
     }
-<<<<<<< HEAD
-
     /*
-Mansour Abdelsalam
-Method: searchByName
------
-Parameters:
-String[][] roomData - 2d array containing room information
------
-Returns:
-void
------
-Description: Asks user for a first name and last name and then prints out each reservation made under that client name, with room number and date information.
-*/
-    public static void searchByName(String[][] roomData) {
-=======
-    /*
-    Programmer: Mansour Abdelsalam
+    Mansour Abdelsalam
     Method: searchByName
     -----
     Parameters:
@@ -239,7 +223,7 @@ Description: Asks user for a first name and last name and then prints out each r
     Description: Asks user for a first name and last name and then prints out each reservation made under that client name, with room number and date information.
     */
     public static void searchByName(String[][] roomData){
->>>>>>> 59ca26f6f649c98323b004477eb9ca18a4cb4d9c
+        //Declarations
         Scanner scan = new Scanner(System.in);
 
         String first_name = "";
@@ -421,23 +405,7 @@ Description: Asks user for a first name and last name and then prints out each r
         return userID;
     }
 
-    /*
-<<<<<<< HEAD
-Programmer: Ryan Mehrian
-Method: addEmployee
-----
-Parameters:
-String[][] accountData - 2D Array with all employee account info.
-----
-Returns:
-updatedData[][] - 2D Array that holds accountData but updated.
-----
-Description:
-Only available to the admin. Creates a new temp array that is one index larger than accountData[], fills the new
-array with every room besides the removed one, and then returns the array.
- */
-    public static String[][] addEmployee(String[][] accountData) {
-=======
+        /*
     Programmer: Ryan Mehrian
     Method: addEmployee
     ----
@@ -452,7 +420,6 @@ array with every room besides the removed one, and then returns the array.
     array with every room besides the removed one, and then returns the array.
      */
     public static String[][] addEmployee(String[][] accountData){
->>>>>>> 59ca26f6f649c98323b004477eb9ca18a4cb4d9c
         //Declarations
         final int VALID_ID_LENGTH = 6;
         String input = null;
@@ -617,10 +584,7 @@ array with every room besides the removed one, and then returns the array.
     }
 
     /*
-<<<<<<< HEAD
-=======
     Programmer: Mansour Abdelsalam
->>>>>>> 59ca26f6f649c98323b004477eb9ca18a4cb4d9c
     Method: makeReservation
     -----
     Parameters:
@@ -788,6 +752,6 @@ array with every room besides the removed one, and then returns the array.
     return temp_roomData; 
   }
 }
-}
+
 
 
