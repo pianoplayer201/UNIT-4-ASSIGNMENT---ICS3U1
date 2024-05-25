@@ -76,7 +76,7 @@ public class HotelSystem {
                         break;
                     case 6:
                         //Change the Reservation
-                        System.out.println("NOT YET IMPLEMENTED");
+                        roomData = changeReservation(roomData, userID);
                         break;
                     case 7:
                         //CHANGE THE PIN
@@ -1265,7 +1265,7 @@ public class HotelSystem {
                 if(!valid_room_num){
                     System.out.println("Room No. "+room_num+" does not exist.");
                 } else if(!valid_date){
-                    Systen.out.println("Room No."+room_num+" is already taken on "+date+".");
+                    System.out.println("Room No."+room_num+" is already taken on "+date+".");
                 }
                 System.out.println();
                 invalid_reservation = true;
@@ -1282,6 +1282,59 @@ public class HotelSystem {
         } else {
             return roomData;
         }
+    }
+
+
+    /*
+    Programmer: Mansour Abdelsalam
+    Method: changePin
+    -----
+    Parameters:
+    String[][] accountData - 2d array containing account information
+    -----
+    Description: Prompts the user for a new pin to replace their old one.
+    */
+    public static void changePin(String[][] accountData, int userID){
+        Scanner scan = new Scanner(System.in);
+    
+        boolean valid_pin = false;
+        String employee_id = "";
+        String new_pin = "";
+        int account_position = 0;
+    
+        employee_id = String.format("%06d", userID);
+    
+        for(int i = 0; i<accountData.length; i++){
+            if(accountData[i][ACCOUNT_ID_INDEX].equals(employee_id)){
+                account_position = i;
+            }
+        }
+    
+        System.out.println("Your user ID is: "+employee_id);
+        System.out.println("Your current PIN is: "+accountData[account_position][ACCOUNT_PIN_INDEX]);
+        System.out.println(); //blank line
+    
+        System.out.println("Enter a new 4-digit PIN:");
+        do{
+            System.out.print("Pin: ");
+            new_pin = scan.nextLine();
+    
+            if((new_pin.length() == 4) && (new_pin.matches("\\d{4}"))){
+                valid_pin = true;
+            } else {
+                System.out.println("Invalid PIN. Please enter a 4-digit number.");
+                System.out.println(); //blank line
+                System.out.println("Reenter PIN:");
+            }
+        } while(!valid_pin);
+        System.out.println();
+    
+        accountData[account_position][ACCOUNT_PIN_INDEX] = new_pin;
+    
+        System.out.println("PIN successfully changed.");
+        System.out.println("Your user ID is: "+employee_id);
+        System.out.println("Your new PIN is: "+accountData[account_position][ACCOUNT_PIN_INDEX]);
+        System.out.println(); //blank line
     }
 }
 
