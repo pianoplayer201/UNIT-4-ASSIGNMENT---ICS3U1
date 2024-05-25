@@ -1292,6 +1292,9 @@ public class HotelSystem {
     Parameters:
     String[][] accountData - 2d array containing account information
     -----
+    Returns:
+    void
+    -----
     Description: Prompts the user for a new pin to replace their old one.
     */
     public static void changePin(String[][] accountData, int userID){
