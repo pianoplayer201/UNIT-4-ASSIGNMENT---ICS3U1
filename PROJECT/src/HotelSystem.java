@@ -658,6 +658,7 @@ public class HotelSystem {
     }
     
     /*
+    Programmer: Mansour Abdelsalam
     Method: searchByName
     -----
     Parameters:
@@ -699,6 +700,7 @@ public class HotelSystem {
     }
     
     /*
+    Programmer: Mansour Abdelsalam
     Method: searchAvailableByDate
     -----
     Parameters:
@@ -765,6 +767,7 @@ public class HotelSystem {
     }
     
     /*
+    Programmer: Mansour Abdelsalam
     Method: searchReservationByDate
     -----
     Parameters:
@@ -831,6 +834,7 @@ public class HotelSystem {
     }
     
     /*
+    Programmer: Mansour Abdelsalam
     Method: makeReservation
     -----
     Parameters:
@@ -958,6 +962,7 @@ public class HotelSystem {
     }
     
     /*
+    Programmer: Mansour Abdelsalam
     Method: deleteReservation
     -----
     Parameters:
@@ -1062,6 +1067,7 @@ public class HotelSystem {
     }
     
     /*
+    Programmer: Mansour Abdelsalam
     Method: changeReservation
     -----
     Parameters:
