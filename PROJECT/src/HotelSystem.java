@@ -431,45 +431,57 @@ public class HotelSystem {
 
     }
 
+    /*
+    Programmer: Noah (edits by Ryan)
+    Method: userLogin
+    -----
+    Parameters:
+    String[][] accountData - 2D Array with all employee account info.
+    -----
+    Returns:
+    int userID - The ID of the user logged in.
+    -----
+    Description: This method prompts the user for their ID and pin, and then verifies that the ID and pin match.
+     */
     public static int userLogin(String[][] accountData) {
         Scanner sc = new Scanner(System.in);
-        int userID;
+        String userID;
         boolean userVerify;
-        int userPin;
+        String userPin = "";
         int accountIndex = 0;
 
         do {
             userVerify = false;
-            System.out.print("Enter ID: ");
-            userID = sc.nextInt();
+            System.out.print("Enter ID\n > ");
+            userID = sc.nextLine();
             for (int i = 0; i <= accountData.length - 1; i++) {
-                if (Integer.parseInt(accountData[i][0]) == (userID)) {
+                if (accountData[i][0].equals(userID)) {
                     userVerify = true;
                     accountIndex += i;
                 }
             }
             while (!userVerify) {
-                System.out.print("Invalid ID entered, enter new ID: ");
-                userID = sc.nextInt();
+                System.out.print("ID INVALID, please re-enter your ID\n > ");
+                userID = sc.nextLine();
 
                 for (int i = 0; i <= accountData.length - 1; i++) {
-                    if (Integer.parseInt(accountData[i][0]) == (userID)) {
+                    if (accountData[i][0].equals(userID)) {
                         userVerify = true;
                         accountIndex += i;
                     }
                 }
             }
 
-            System.out.print("enter pin: ");
-            userPin = sc.nextInt();
+            System.out.print("Enter pin: ");
+            userPin = sc.nextLine();
 
-            while (Integer.parseInt(accountData[accountIndex][3]) != (userPin) && userPin != 0) {
-                System.out.print("Incorrect pin entered, enter new pin: ");
-                userPin = sc.nextInt();
+            while (!accountData[accountIndex][3].equals(userPin) && !userPin.equals("0")){
+                    System.out.print("Incorrect pin entered, enter your pin, or enter '0' to enter a different ID\n > ");
+                    userPin = sc.nextLine();
             }
-        } while (userPin == 0);
+        } while (userPin.equals("0"));
 
-        return userID;
+        return Integer.parseInt(userID);
     }
 
         /*
@@ -954,7 +966,7 @@ public class HotelSystem {
             if(room_num == Integer.parseInt(roomData[i][RES_ROOM])){
                 if(date.equals(roomData[i][RES_DATE])){
                     valid_reservation = true;
-                    System.out.printf("Customer %s %s has booked Room No. %s for the date %s.\n",roomData[i][FNAME],roomData[i][LNAME],roomData[i][ROOM],roomData[i][DATE]);
+                    System.out.printf("Customer %s %s has booked Room No. %s for the date %s.\n",roomData[i][ACCOUNT_FIRSTNAME_INDEX],roomData[i][ACCOUNT_LASTNAME_INDEX],roomData[i][RES_ROOM],roomData[i][RES_DATE]);
                     System.out.println(); //blank line
                 }
             }
