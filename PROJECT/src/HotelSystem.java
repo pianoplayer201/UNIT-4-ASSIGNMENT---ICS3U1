@@ -309,6 +309,9 @@ public class HotelSystem {
                 System.out.println(); //blank line
             }
         }
+
+        System.out.println("Press Enter to Continue");
+        scan.nextLine();
     }
 
     /*
@@ -366,8 +369,12 @@ public class HotelSystem {
             if (!room_found) {
                 System.out.println("No rooms available on this date.");
                 System.out.println(); //blank line
+
             }
         }
+
+        System.out.println("Press Enter to Continue");
+        scan.nextLine();
     }
 
     /*
@@ -428,6 +435,9 @@ public class HotelSystem {
                 System.out.println(); //blank line
             }
         }
+
+        System.out.println("Press Enter to Continue");
+        scan.nextLine();
 
     }
 
@@ -664,7 +674,7 @@ public class HotelSystem {
 
     /*
     Programmer: Mansour Abdelsalam
-    Method: makeReservation
+    Method: makeReservation (edits by Ryan)
     -----
     Parameters:
     String[][] roomData - 2d array containing room information
@@ -681,6 +691,7 @@ public class HotelSystem {
         Scanner scan = new Scanner(System.in);
 
         boolean valid_date = false;
+        boolean valid_room = false;
         boolean room_taken = false;
         String[][] temp_array;
         int room_num = 0;
@@ -692,10 +703,22 @@ public class HotelSystem {
         String last_name = "";
         String employee_id = "";
 
-        System.out.println("Enter room number to be reserved.");
-        System.out.print("Room #: ");
-        room_num = scan.nextInt();
-        System.out.println(); //blank line
+        while(!valid_room){
+            System.out.println("Enter room number to be reserved.");
+            System.out.print("Room #: ");
+            room_num = scan.nextInt();
+            System.out.println(); //blank line
+
+            for(int i = 0; i < roomData.length; i++){
+                if(room_num == Integer.parseInt(roomData[i][RES_ROOM])){
+                    valid_room = true;
+                }
+                else{
+                    System.out.println("ROOM DOES NOT EXIST");
+                }
+            }
+        }
+
 
         System.out.println("Enter the date to reserve.");
         do {
@@ -863,7 +886,7 @@ public class HotelSystem {
 
         //List Options, Input and Validation
         while(!inputValid){
-            System.out.printf("WELCOME %s, what would you like to do today?\n", userName);
+            System.out.printf("WELCOME %S, what would you like to do today?\n", userName);
 
             //DEFAULT OPTIONS
             System.out.print("1. Search for Available Rooms by Date\n" +
