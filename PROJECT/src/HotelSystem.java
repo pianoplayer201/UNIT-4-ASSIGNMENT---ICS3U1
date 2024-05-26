@@ -80,7 +80,7 @@ public class HotelSystem {
                         break;
                     case 7:
                         //CHANGE THE PIN
-                        //changePin(accountData, userID);
+                        changePin(accountData, userID);
                         break;
                     case 8:
                         //Add Employee
