@@ -1,6 +1,25 @@
-
 /*
-djfjsjgsfjkj
+Name:
+HotelSystem
+-----
+Programmers:
+Ryan Mehrian
+Mansour Abdelsalam
+Noah Hur
+-----
+Date finished:
+05-27-2024
+-----
+Description: 
+Perpetual (never stops looping) hotel system that handles many different functions for a hotel.
+Reads from the account.txt and reservation.txt files, and saves them to 2d arrays for editing and interacting.
+Starts with a login that prompts the user for an employee ID and PIN, and moves them to the main menu when login is successful.
+The main menu displays options from 1-11 featuring changing, deleting, and making reservations/rooms/employee accounts, as well as a logout.
+Options including making changes to rooms and employees are only available to the admin.
+Upon logout, all changes made to the 2d arrays are written to their respective files.
+
+account.txt contains all employee information; the employee id of 000000 is reserved for the admin
+reservation.txt contains all room and reservation information; rooms that are not reserved have values of -1 other than room number
 */
 import java.io.*;
 import java.util.InputMismatchException;
