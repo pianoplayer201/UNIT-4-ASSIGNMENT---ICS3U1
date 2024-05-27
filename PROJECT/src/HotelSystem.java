@@ -1489,21 +1489,25 @@ public class HotelSystem {
     
     public static String[][] deleteRoom(String[][] roomData)
   {
+    //Scanner creation and variable initialization
     Scanner sc = new Scanner(System.in);
     boolean roomVerify = false;
     String roomDelete;
     String[][] temp_roomData; 
     int roomCount = 0;
     int validRoom = -1;  
-    
+
+    //prompt user to enter room number to delete
     System.out.print("Enter room number to delete (enter 0 to return to main menu): ");
     roomDelete = sc.nextLine(); 
-    
+
+    //if 0 is entered roomVerify = true
     if (roomDelete.equals(0))
     {
       roomVerify = true;
     }
-    
+
+    //checks if room entered is valid, if valid roomVerify = true
     for (int i = 0; i <= roomData.length - 1;i++)
     {
       if (roomDelete.equals(roomData[i][0]));
@@ -1511,7 +1515,8 @@ public class HotelSystem {
         roomVerify = true;
       }
     }
-    
+
+    //if roomVerify is false, do while loop will run until valid entry is entered 
     if (roomVerify == false)
     {
         do 
@@ -1528,12 +1533,14 @@ public class HotelSystem {
           }
         } while (roomVerify == false); 
       }
-    
+      
+    //returns original roomData if 0 is entered
       if (roomVerify == true && roomDelete.equals(0)) 
       {
         return roomData; 
       }
-    
+
+    //removes all indexes with deleted room and moves data to temp_roomData and returns temp_roomData
       else
       {
         for (int i = 0; i <= roomData.length - 1; i++)
@@ -1543,7 +1550,8 @@ public class HotelSystem {
             roomCount += 1;
           }
         }
-      
+          
+      //temp_roomData initialization 
         temp_roomData = new String[roomData.length - roomCount][5];
       
         for (int i = 0; i <= temp_roomData.length - 1; i++)
