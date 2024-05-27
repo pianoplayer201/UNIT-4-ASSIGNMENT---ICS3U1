@@ -104,7 +104,7 @@ public class HotelSystem {
                     case 11:
                         //Delete Rooms
                         if(isAdmin){
-                            deleteRoom(roomData);
+                            roomData = deleteRoom(roomData);
                         }
                         break;
                 }
@@ -1342,11 +1342,12 @@ public class HotelSystem {
 
             /*
     Method: deleteRoom
-    Name: Noah Hur
+    Name: Noah Hur (edited by Ryan)
     Dates worked on: 2024-05-24,
     Work done:
     */
     public static String[][] deleteRoom(String[][] roomData) {
+        //scanner creation and variable initialization
         Scanner sc = new Scanner(System.in);
         boolean roomVerify = false;
         String roomDelete;
@@ -1354,13 +1355,16 @@ public class HotelSystem {
         int roomCount = 0;
         int validRoom = -1;
 
+        //prompts user to enter room to delete
         System.out.println("Enter room number to delete (enter 0 to return to main menu): ");
         roomDelete = sc.nextLine();
 
-        if (roomDelete.equals(0)) {
+        //if 0 is entered roomVerify = true
+        if (roomDelete.equals("0")) {
             roomVerify = true;
         }
 
+        //checks if room is valid
         for (int i = 0; i <= roomData.length - 1; i++) {
             if (roomDelete.equals(roomData[i][0])) ;
             {
@@ -1368,23 +1372,29 @@ public class HotelSystem {
             }
         }
 
-        if (roomVerify == false) {
-            do {
-                System.out.println("Invalid room number, enter new room number to delete");
-                roomDelete = sc.nextLine();
+        //if room is invalid, will run until valid room is entered
 
-                for (int i = 0; i <= roomData.length - 1; i++) {
-                    if (roomDelete.equals(roomData[i][0])) ;
-                    {
-                        roomVerify = true;
-                    }
+        while (!roomVerify) {
+            System.out.println("Invalid room number, enter new room number to delete");
+            roomDelete = sc.nextLine();
+
+            if (roomDelete.equals("0")) {
+                roomVerify = true;
+            }
+            for (int i = 0; i <= roomData.length - 1; i++) {
+                if (roomDelete.equals(roomData[i][0])) ;
+                {
+                    roomVerify = true;
                 }
-            } while (roomVerify == false);
+            }
         }
 
-        if (roomVerify == true && roomDelete.equals(0)) {
+        //if 0 entered original roomData is returned
+        if (roomVerify == true && roomDelete.equals("0")) {
             return roomData;
-        } else {
+        }
+        // counts number of indexes with room number
+        else {
             for (int i = 0; i <= roomData.length - 1; i++) {
                 if (roomData[i][0].equals(roomDelete)) {
                     roomCount += 1;
@@ -1393,18 +1403,19 @@ public class HotelSystem {
 
             temp_roomData = new String[roomData.length - roomCount][5];
 
-            for (int i = 0; i <= temp_roomData.length - 1; i++) {
+            for (int i = 0; i < temp_roomData.length-1; i++) {
                 do {
                     validRoom++;
 
                     if (!roomDelete.equals(roomData[validRoom][0])) {
-                        for (int n = 0; n <= 5; n++) {
+                        for (int n = 0; n < 5; n++) {
                             temp_roomData[i][n] = roomData[validRoom][n];
                         }
                     }
                 } while (roomDelete.equals(roomData[validRoom][0]));
             }
-            return temp_roomData;
         }
+        return temp_roomData;
+
     }
 }
