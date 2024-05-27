@@ -43,8 +43,11 @@ public class HotelSystem {
             //Login
             userID = userLogin(accountData);
             loggedIn = true;
-            if(userID == ADMIN_ID);{
+            if(userID == ADMIN_ID){
                 isAdmin = true;
+            }
+            else{
+                isAdmin = false;
             }
 
             //Logged in Menus
