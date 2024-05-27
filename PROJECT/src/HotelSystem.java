@@ -879,7 +879,8 @@ public class HotelSystem {
         do{
             try{
                 System.out.print("Room #: ");
-                room_num = scan.nextInt();
+                try {room_num = (int) scan.nextShort();}
+                catch (InputMismatchException e) {System.out.println("Invalid input. Please enter numerical values.");}
                 System.out.println(); //blank line
 
                 valid_room_num = true;
