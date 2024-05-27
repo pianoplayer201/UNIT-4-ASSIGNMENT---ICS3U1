@@ -130,7 +130,7 @@ public class HotelSystem {
     Description: This method reads in all employee account data from the file, and
     then returns it as a 2D array. Each row of the array is a separate employee, and each
     column contains that employee's info (ID, First Name, Last name, Pin)
-     */
+    */
     public static String[][] readAccounts(String filepath) {
 
         //Declarations
@@ -1397,10 +1397,18 @@ public class HotelSystem {
     }
 
     /*
+    Programmer: Noah Hur (EDITED BY MANSOUR)
     Method: deleteRoom
-    Name: Noah Hur (EDITED BY MANSOUR)
-    Dates worked on: 2024-05-24,2024-05-27
-    Work done: 
+    -----
+    Parameters:
+    String[][] roomData - 2d array that contains all room data.
+    -----
+    Returns:
+    String[][] temp_roomData - 2d array that contains all edits made to roomData
+    -----
+    Description: Only available to the admin. Creates a new temp array that is n smaller (n representing number of times that room is mentioned) than roomData[], 
+    fills the new array with every room besides the removed one, and then assigns that temp array to roomData[].
+    The method will also check for invalid input. Exit by entering 0 as input.
     */
     public static String[][] deleteRoom(String[][] roomData) {
         //scanner creation and variable initialization
