@@ -2,7 +2,6 @@
 djfjsjgsfjkj
 */
 import jdk.jshell.spi.ExecutionControl;
-
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -773,7 +772,7 @@ public class HotelSystem {
         int month = 0;
         int day = 0;
         int year = 0;
-        StringBuilder date = new StringBuilder();
+        String date = "";
 
         // prompt the user to enter the date
         System.out.println("Enter the date to check.");
@@ -790,7 +789,7 @@ public class HotelSystem {
                 // validate the entered date
                 if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
                     // if valid, construct the date string
-                    date.append(month).append("/").append(day).append("/").append(year);
+                    date += month + ("/") + day + ("/") + (year);
                     valid_date = true;
                 } else {
                     // if not valid, ask the user to reenter the date
@@ -849,7 +848,7 @@ public class HotelSystem {
         int month = 0;
         int day = 0;
         int year = 0;
-        StringBuilder date = new StringBuilder();
+        String date = "";
 
         // prompt the user to enter the date
         System.out.println("Enter the date to check.");
@@ -866,7 +865,7 @@ public class HotelSystem {
                 // validate the entered date
                 if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
                     // if valid, construct the date string
-                    date.append(month).append("/").append(day).append("/").append(year);
+                    date += month + ("/") + day + ("/") + (year);
                     valid_date = true;
                 } else {
                     // if not valid, ask the user to reenter the date
@@ -934,7 +933,7 @@ public class HotelSystem {
         int month = 0;
         int day = 0;
         int year = 0;
-        StringBuilder date = new StringBuilder();
+        String date = "";
         String first_name = "";
         String last_name = "";
         String employee_id = "";
@@ -971,7 +970,7 @@ public class HotelSystem {
 
                 // if date is valid, set valid_date to true
                 if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
-                    date.append(month).append("/").append(day).append("/").append(year);
+                    date += month + ("/") + day + ("/") + (year);
                     valid_date = true;
                 } else {
                     // if date is invalid, prompt user to reenter the date
@@ -1075,7 +1074,7 @@ public class HotelSystem {
         int month = 0;
         int day = 0;
         int year = 0;
-        StringBuilder date = new StringBuilder();
+        String date = "";
         int room_position = 0;
 
         // prompt user to enter room number to be deleted
@@ -1107,7 +1106,7 @@ public class HotelSystem {
 
                 // validate the entered date
                 if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
-                    date.append(month).append("/").append(day).append("/").append(year);
+                    date += month + ("/") + day + ("/") + (year);
                     valid_date = true;
                 } else {
                     System.out.println("Invalid date entered.");
@@ -1192,7 +1191,7 @@ public class HotelSystem {
         int month = 0;
         int day = 0;
         int year = 0;
-        StringBuilder date = new StringBuilder();
+        String date = "";
         String first_name = "";
         String last_name = "";
         String employee_id = "";
@@ -1233,7 +1232,7 @@ public class HotelSystem {
 
                 // validate date
                 if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
-                    date.append(month).append("/").append(day).append("/").append(year);
+                    date += month + ("/") + day + ("/") + (year);
                     valid_date = true;
                 } else {
                     // handle invalid date
@@ -1276,7 +1275,7 @@ public class HotelSystem {
             month = 0;
             day = 0;
             year = 0;
-            date = new StringBuilder();
+            date = "";
 
             // prompt user to enter new reservation details
             System.out.println("Enter the new information for this reservation.");
@@ -1312,7 +1311,7 @@ public class HotelSystem {
 
                     // validate date
                     if (((month <= 12) && (month >= 1)) && ((day <= 31) && (day >= 1))){
-                        date.append(month).append("/").append(day).append("/").append(year);
+                        date += month + ("/") + day + ("/") + (year);
                         valid_date = true;
                     } else {
                         System.out.println("Invalid date entered.");
