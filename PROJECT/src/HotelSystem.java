@@ -1,6 +1,25 @@
-
 /*
-djfjsjgsfjkj
+Name:
+HotelSystem
+-----
+Programmers:
+Ryan Mehrian
+Mansour Abdelsalam
+Noah Hur
+-----
+Date finished:
+05-27-2024
+-----
+Description: 
+Perpetual (never stops looping) hotel system that handles many different functions for a hotel.
+Reads from the account.txt and reservation.txt files, and saves them to 2d arrays for editing and interacting.
+Starts with a login that prompts the user for an employee ID and PIN, and moves them to the main menu when login is successful.
+The main menu displays options from 1-11 featuring changing, deleting, and making reservations/rooms/employee accounts, as well as a logout.
+Options including making changes to rooms and employees are only available to the admin.
+Upon logout, all changes made to the 2d arrays are written to their respective files.
+
+account.txt contains all employee information; the employee id of 000000 is reserved for the admin
+reservation.txt contains all room and reservation information; rooms that are not reserved have values of -1 other than room number
 */
 import java.io.*;
 import java.util.InputMismatchException;
@@ -133,7 +152,7 @@ public class HotelSystem {
     Description: This method reads in all employee account data from the file, and
     then returns it as a 2D array. Each row of the array is a separate employee, and each
     column contains that employee's info (ID, First Name, Last name, Pin)
-     */
+    */
     public static String[][] readAccounts(String filepath) {
 
         //Declarations
@@ -882,10 +901,8 @@ public class HotelSystem {
         do{
             try{
                 System.out.print("Room #: ");
-                try {room_num = (int) scan.nextShort();}
-                catch (InputMismatchException e) {System.out.println("Invalid input. Please enter numerical values.");}
+                room_num = scan.nextInt();
                 System.out.println(); //blank line
-
                 valid_room_num = true;
             } catch(InputMismatchException e){
                 System.out.println("Invalid input. Please enter numerical values.");
@@ -1402,10 +1419,18 @@ public class HotelSystem {
     }
 
     /*
+    Programmer: Noah Hur (EDITED BY MANSOUR)
     Method: deleteRoom
-    Name: Noah Hur
-    Dates worked on: 2024-05-24,
-    Work done:
+    -----
+    Parameters:
+    String[][] roomData - 2d array that contains all room data.
+    -----
+    Returns:
+    String[][] temp_roomData - 2d array that contains all edits made to roomData
+    -----
+    Description: Only available to the admin. Creates a new temp array that is n smaller (n representing number of times that room is mentioned) than roomData[], 
+    fills the new array with every room besides the removed one, and then assigns that temp array to roomData[].
+    The method will also check for invalid input. Exit by entering 0 as input.
     */
     public static String[][] deleteRoom(String[][] roomData) {
         //scanner creation and variable initialization
@@ -1414,69 +1439,48 @@ public class HotelSystem {
         String roomDelete;
         String[][] temp_roomData;
         int roomCount = 0;
-        int validRoom = -1;
+        int index = 0;
 
         //prompts user to enter room to delete
         System.out.println("Enter room number to delete (enter 0 to return to main menu): ");
-        roomDelete = sc.nextLine();
-
-        //if 0 is entered roomVerify = true
-        if (roomDelete.equals("0")) {
-            roomVerify = true;
-        }
-
-        //checks if room is valid
-        for (int i = 0; i <= roomData.length - 1; i++) {
-            if (roomDelete.equals(roomData[i][0])) ;
-            {
-                roomVerify = true;
-            }
-        }
-
-        //if room is invalid, will run until valid room is entered
-
-        while (!roomVerify) {
-            System.out.println("Invalid room number, enter new room number to delete");
+        do{
+            System.out.print("Room #: ");
             roomDelete = sc.nextLine();
 
+            //if 0 is entered exit method and return original roomData
             if (roomDelete.equals("0")) {
-                roomVerify = true;
+                System.out.println(); //blank line
+                return roomData;
             }
-            for (int i = 0; i <= roomData.length - 1; i++) {
-                if (roomDelete.equals(roomData[i][0])) ;
-                {
-                    roomVerify = true;
-                }
-            }
-        }
 
-        //if 0 entered original roomData is returned
-        if (roomVerify == true && roomDelete.equals("0")) {
-            return roomData;
-        }
-        // counts number of indexes with room number
-        else {
-            for (int i = 0; i <= roomData.length - 1; i++) {
-                if (roomData[i][0].equals(roomDelete)) {
+            //checks if room is valid and counts amount of times room appears
+            for (int i = 0; i < roomData.length; i++) {
+                if (roomDelete.equals(roomData[i][RES_DATA])){
+                    roomVerify = true;
                     roomCount += 1;
                 }
             }
 
-            temp_roomData = new String[roomData.length - roomCount][5];
+            //output if room number is invalid
+            if(!roomVerify){
+                System.out.println("Invalid room entered.");
+                System.out.println(); //blank line
+                System.out.println("Reenter room number:");
+            }
+        } while(!roomVerify); //if room is invalid, will run until valid room is entered
+        System.out.println(); //blank line
 
-            for (int i = 0; i < temp_roomData.length-1; i++) {
-                do {
-                    validRoom++;
+        //initialise temp_roomData with a size less than roomData by the amount of times the specified room is found
+        temp_roomData = new String[roomData.length - roomCount][RES_DATA];
 
-                    if (!roomDelete.equals(roomData[validRoom][0])) {
-                        for (int n = 0; n < 5; n++) {
-                            temp_roomData[i][n] = roomData[validRoom][n];
-                        }
-                    }
-                } while (roomDelete.equals(roomData[validRoom][0]));
+        //fill temp_roomData with roomData's information excluding the rooms to be deleted
+        for (int i = 0; i < roomData.length; i++) {
+            if(!(roomData[i][RES_ROOM]).equals(roomDelete)){
+                temp_roomData[index] = roomData[i];
+                index++;
             }
         }
-        return temp_roomData;
-
+        
+      return temp_roomData;
     }
 }
