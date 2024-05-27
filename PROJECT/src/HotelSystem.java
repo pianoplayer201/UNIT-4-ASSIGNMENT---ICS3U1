@@ -672,19 +672,23 @@ public class HotelSystem {
     public static void searchByName(String[][] roomData){
         Scanner scan = new Scanner(System.in);
 
+        //variables
         boolean name_found = false;
         String first_name = "";
         String last_name = "";
 
+        //ask for client information
         System.out.println("Enter the client's information.");
         System.out.print("First name: ");
         first_name = scan.nextLine();
         System.out.print("Last name: ");
         last_name = scan.nextLine();
-
         System.out.println(); //blank line
+        
+        //output rooms reserved
         System.out.println("Rooms reserved by "+first_name+" "+last_name+":");
 
+        //loop through array to find any matching clients
         for (int i = 0; i<roomData.length; i++){
             if(((roomData[i][RES_FNAME].toLowerCase()).equals(first_name.toLowerCase())) && ((roomData[i][RES_LNAME].toLowerCase()).equals(last_name.toLowerCase()))&&(!first_name.equals("-1"))){
                 name_found = true;
@@ -694,6 +698,7 @@ public class HotelSystem {
             }
         }
         if(!name_found){
+            //output if no reservations found for client
             System.out.println("No reservations found for this client.");
             System.out.println(); //blank line
         }
@@ -715,6 +720,7 @@ public class HotelSystem {
     public static void searchAvailableByDate(String[][] roomData){
         Scanner scan = new Scanner(System.in);
 
+        //variables
         boolean valid_date = false;
         boolean room_found = false;
         int month = 0;
@@ -722,6 +728,7 @@ public class HotelSystem {
         int year = 0;
         String date = "";
 
+        //ask for date
         System.out.println("Enter the date to check.");
         do{
             try{
@@ -748,21 +755,19 @@ public class HotelSystem {
             }
         } while(!valid_date);
 
-        if(valid_date){
-            System.out.println(); //blank line
-            System.out.println("Available rooms on "+date+":");
+        System.out.println(); //blank line
+        System.out.println("Available rooms on "+date+":");
 
-            for(int i = 0; i<roomData.length; i++){
-                if(!roomData[i][RES_DATE].equals(date)){
-                    room_found = true;
-                    System.out.println("Room #: "+roomData[i][RES_ROOM]);
-                    System.out.println(); //blank line
-                }
-            }
-            if(!room_found){
-                System.out.println("No rooms available on this date.");
+        for(int i = 0; i<roomData.length; i++){
+            if(!roomData[i][RES_DATE].equals(date)){
+                room_found = true;
+                System.out.println("Room #: "+roomData[i][RES_ROOM]);
                 System.out.println(); //blank line
             }
+        }
+        if(!room_found){
+           System.out.println("No rooms available on this date.");
+            System.out.println(); //blank line
         }
     }
 
@@ -781,6 +786,7 @@ public class HotelSystem {
     public static void searchReservationByDate(String[][] roomData){
         Scanner scan = new Scanner(System.in);
 
+        //variables
         boolean valid_date = false;
         boolean room_found = false;
         int month = 0;
@@ -788,6 +794,7 @@ public class HotelSystem {
         int year = 0;
         String date = "";
 
+        //ask for date
         System.out.println("Enter the date to check.");
         do{
             try{
@@ -813,23 +820,24 @@ public class HotelSystem {
                 System.out.println("Reenter date:");
             }
         } while(!valid_date);
-
-        if(valid_date){
-            System.out.println(); //blank line
-            System.out.println("Rooms reserved on "+date+":");
-
-            for(int i = 0; i<roomData.length; i++){
-                if(roomData[i][RES_DATE].equals(date)){
-                    room_found = true;
-                    System.out.println("Room #: "+roomData[i][RES_ROOM]);
-                    System.out.println("Customer name: "+roomData[i][RES_FNAME]+" "+roomData[i][RES_LNAME]);
-                    System.out.println(); //blank line
-                }
-            }
-            if(!room_found){
-                System.out.println("No rooms are reserved on this date.");
+        System.out.println(); //blank line
+        
+        //output rooms reserved on the date provided
+        System.out.println("Rooms reserved on "+date+":");
+        
+        //loop through array to find rooms reserved on date
+        for(int i = 0; i<roomData.length; i++){
+            if(roomData[i][RES_DATE].equals(date)){
+                room_found = true;
+                System.out.println("Room #: "+roomData[i][RES_ROOM]);
+                System.out.println("Customer name: "+roomData[i][RES_FNAME]+" "+roomData[i][RES_LNAME]);
                 System.out.println(); //blank line
             }
+        }
+        if(!room_found){
+            //output if no rooms found on date
+            System.out.println("No rooms are reserved on this date.");
+            System.out.println(); //blank line
         }
     }
 
@@ -851,6 +859,7 @@ public class HotelSystem {
     public static String[][] makeReservation(String[][] roomData, int userID){
         Scanner scan = new Scanner(System.in);
 
+        //variables
         boolean room_exists = false;
         boolean valid_room_num = false;
         boolean valid_date = false;
@@ -865,6 +874,7 @@ public class HotelSystem {
         String last_name = "";
         String employee_id = "";
 
+        //ask for room number
         System.out.println("Enter room number to be reserved.");
         do{
             try{
@@ -881,6 +891,7 @@ public class HotelSystem {
             }
         } while(!valid_room_num);
 
+        //ask for date
         System.out.println("Enter the date to be reserved.");
         do{
             try{
@@ -909,10 +920,13 @@ public class HotelSystem {
         System.out.println(); //blank line
         scan.nextLine(); //get rid of new line in input stream
 
+        //loop through array to check if the room is taken on the date provided and exists
         for(int i = 0; i<roomData.length; i++){
             if(room_num == Integer.parseInt(roomData[i][RES_ROOM])){
+                //true if the room is found in roomData
                 room_exists = true;
                 if(date.equals(roomData[i][RES_DATE])){
+                    //tell user that room cannot be booked
                     room_taken = true;
                     System.out.println("This room cannot be booked on this date.");
                     System.out.printf("Customer %s %s has already booked Room No. %s for the date %s.\n",roomData[i][RES_FNAME],roomData[i][RES_LNAME],roomData[i][RES_ROOM],roomData[i][RES_DATE]);
@@ -921,6 +935,7 @@ public class HotelSystem {
             }
         }
 
+        //ask for client information after room is confirmed to exist and is free on the date
         if ((!room_taken) && (room_exists)) {
             System.out.println("Enter the client's information.");
             System.out.print("First name: ");
@@ -929,10 +944,12 @@ public class HotelSystem {
             last_name = scan.nextLine();
             System.out.println(); //blank line
 
+            //turn employee id into a proper format to store
             employee_id = String.format("%06d", userID);
             System.out.println("Your user ID is: "+employee_id);
             System.out.println(); //blank line
 
+            //fill temp_array with roomData's information, set temp_array's size to 1 more than roomData
             temp_array = new String[roomData.length+1][RESERVATION_ELEMENT_COUNT];
             for(int i = 0; i<roomData.length; i++){
                 for(int j = 0; j<RESERVATION_ELEMENT_COUNT; j++){
@@ -945,6 +962,7 @@ public class HotelSystem {
             temp_array[temp_array.length-1][RES_LNAME] = last_name;
             temp_array[temp_array.length-1][RES_EMPL_ID] = employee_id;
 
+            //output reservation information
             System.out.println("Reservation made:");
             for(int i = 0; i<RESERVATION_ELEMENT_COUNT; i++){
                 System.out.println(temp_array[roomData.length][i]);
@@ -953,6 +971,7 @@ public class HotelSystem {
 
             return temp_array;
         } else {
+            //output if room does not exist
             if(!room_exists){
                 System.out.println("Room No. "+room_num+" does not exist.");
                 System.out.println(); //blank line
@@ -977,6 +996,7 @@ public class HotelSystem {
     public static String[][] deleteReservation(String[][] roomData, int userID){
         Scanner scan = new Scanner(System.in);
 
+        //variables
         boolean valid_room_num = false;
         boolean valid_date = false;
         boolean valid_reservation = false;
@@ -988,6 +1008,7 @@ public class HotelSystem {
         String date = "";
         int room_position = 0;
 
+        //ask for room number
         System.out.println("Enter the room number of the reservation to be deleted.");
         do{
             try{
@@ -1003,6 +1024,7 @@ public class HotelSystem {
             }
         } while(!valid_room_num);
 
+        //ask for date
         System.out.println("Enter the date of the reservation to be deleted.");
         do{
             try{
@@ -1031,26 +1053,31 @@ public class HotelSystem {
         System.out.println(); //blank line
         scan.nextLine(); //get rid of new line in input stream
 
+        //loop through roomData to check if there is a reservation for the room number on the date provided
         for(int i = 0; i<roomData.length; i++){
             if(room_num == Integer.parseInt(roomData[i][RES_ROOM])){
                 if(date.equals(roomData[i][RES_DATE])){
                     valid_reservation = true;
-                    room_position = i;
+                    room_position = i; //store the position of the room in the array
                     System.out.printf("Customer %s %s has booked Room No. %s for the date %s.\n",roomData[i][RES_FNAME],roomData[i][RES_LNAME],roomData[i][RES_ROOM],roomData[i][RES_DATE]);
                     System.out.println(); //blank line
                 }
             }
         }
 
+        //delete the reservation if the reservation is valid
         if (valid_reservation) {
+            //initialise temp_array to be the same size as roomData
             temp_array = new String[roomData.length][RESERVATION_ELEMENT_COUNT];
-
+            
+            //fill temp_array with roomData's information
             for(int i = 0; i<roomData.length; i++){
                 for(int j = 0; j<RESERVATION_ELEMENT_COUNT; j++){
                     temp_array[i][j] = roomData[i][j];
                 }
             }
 
+            //fill the reservation's information with -1 other than room number
             for(int i = 1; i<RESERVATION_ELEMENT_COUNT; i++){
                 temp_array[room_position][i] = String.valueOf(-1);
             }
@@ -1060,6 +1087,7 @@ public class HotelSystem {
 
             return temp_array;
         } else {
+            //ouptut if there is no reservation for the room number on the date
             System.out.println("No reservation found for this room number and date.");
             System.out.println(); //blank line
             return roomData;
@@ -1083,6 +1111,7 @@ public class HotelSystem {
     public static String[][] changeReservation(String[][] roomData, int userID){
         Scanner scan = new Scanner(System.in);
 
+        //variables
         boolean valid_room_num = false;
         boolean valid_date = false;
         boolean valid_reservation_found = false;
@@ -1099,8 +1128,10 @@ public class HotelSystem {
         String employee_id = "";
         int room_position = 0;
 
+        //initialise temp_array to be the same size as roomData
         temp_array = new String[roomData.length][RESERVATION_ELEMENT_COUNT];
 
+        //ask for room number
         System.out.println("Enter the room number of the reservation to be changed.");
         do{
             try{
@@ -1116,6 +1147,7 @@ public class HotelSystem {
             }
         } while(!valid_room_num);
 
+        //ask for date
         System.out.println("Enter the date of the reservation to be changed.");
         do{
             try{
@@ -1144,11 +1176,12 @@ public class HotelSystem {
         System.out.println(); //blank line
         scan.nextLine(); //get rid of new line in input stream
 
+        //output information for the room nubmber if found and set valid_reservation_found to true
         for(int i = 0; i<roomData.length; i++){
             if(room_num == Integer.parseInt(roomData[i][RES_ROOM])){
                 if(date.equals(roomData[i][RES_DATE])){
                     valid_reservation_found = true;
-                    room_position = i;
+                    room_position = i; //store the position of the room in the array
                     System.out.println("Room #: "+roomData[i][RES_ROOM]);
                     System.out.println("Date reserved: "+roomData[i][RES_DATE]);
                     System.out.println("First name: "+roomData[i][RES_FNAME]);
@@ -1159,15 +1192,17 @@ public class HotelSystem {
         }
 
         if (valid_reservation_found) {
-
+            //reset the values for room number, month, day, year, and date to be used to store new information
             room_num = 0;
             month = 0;
             day = 0;
             year = 0;
             date = "";
 
+            //ask user for new information
             System.out.println("Enter the new information for this reservation.");
 
+            //ask for room number
             valid_room_num = false;
             System.out.println("New Room #: ");
             do{
@@ -1184,6 +1219,7 @@ public class HotelSystem {
             } while(!valid_room_num);
             System.out.println();
 
+            //ask for date
             valid_date = false;
             System.out.println("New date reserved: ");
             do{
@@ -1213,55 +1249,67 @@ public class HotelSystem {
             System.out.println(); //blank line
             scan.nextLine(); //get rid of new line in input stream
 
+            //ask for first name
             System.out.println("New first name: ");
             first_name = scan.nextLine();
             System.out.println(); //blank line
 
+            //ask for last name
             System.out.println("New last name: ");
             last_name = scan.nextLine();
             System.out.println(); //blank line
 
+            //format employee id
             employee_id = String.format("%06d", userID);
             System.out.println("Your user ID is: "+employee_id);
             System.out.println();
 
+            //check if valid_date is false and if valid_room_num is true
             valid_date = true;
             valid_room_num = false;
 
             for(int i = 0; i<roomData.length; i++){
                 if(room_num == Integer.parseInt(roomData[i][RES_ROOM])){
+                    //set valid_room_num to true if it is found within the roomData array
                     valid_room_num = true;
                     if (i != room_position){
                         if(date.equals(roomData[i][RES_DATE])){
+                            //set valid_date to false if the room number is taken (should really be named room_taken)
                             valid_date = false;
                         }
                     }
                 }
             }
 
+            //set valid_reservation_made to true if the room exists and is not taken on the date
             if(valid_date && valid_room_num){
                 valid_reservation_made = true;
             }
 
+            //begin changing information if the changes to reservation are valid
             if(valid_reservation_made){
+                //fill temp_array with roomData's information
                 for(int i = 0; i<roomData.length; i++){
                     for(int j = 0; j<roomData.length; j++){
                         temp_array[i][j] = roomData[i][j];
                     }
                 }
 
+                //change the information of the room at room_position to the new information
                 temp_array[room_position][RES_ROOM] = String.valueOf(room_num);
                 temp_array[room_position][RES_DATE] = date;
                 temp_array[room_position][RES_FNAME] = first_name;
                 temp_array[room_position][RES_LNAME] = last_name;
                 temp_array[room_position][RES_EMPL_ID] = employee_id;
 
+                //output new reservation information
                 System.out.println("Reservation changed:");
                 for(int i = 0; i<RESERVATION_ELEMENT_COUNT; i++){
                     System.out.println(temp_array[room_position][i]);
                 }
                 System.out.println(); //blank line
             } else {
+                //output if invalid new room number or taken on the new date
                 if(!valid_room_num){
                     System.out.println("Room No. "+room_num+" does not exist.");
                 } else if(!valid_date){
@@ -1270,13 +1318,14 @@ public class HotelSystem {
                 System.out.println();
                 invalid_reservation = true;
             }
-
         } else {
+            //output if no reservation is found for the provided room number and date
             invalid_reservation = true;
             System.out.println("No reservation found for this room number and date.");
             System.out.println();
         }
 
+        //return new array if valid, return original array if invalid
         if(!invalid_reservation){
             return temp_array;
         } else {
@@ -1300,28 +1349,34 @@ public class HotelSystem {
     public static void changePin(String[][] accountData, int userID){
         Scanner scan = new Scanner(System.in);
 
+        //variables
         boolean valid_pin = false;
         String employee_id = "";
         String new_pin = "";
         int account_position = 0;
 
+        //format employee id
         employee_id = String.format("%06d", userID);
 
+        //loop through accountData to find the position of the user's data (the user ID should already exist)
         for(int i = 0; i<accountData.length; i++){
             if(accountData[i][ACCOUNT_ID_INDEX].equals(employee_id)){
-                account_position = i;
+                account_position = i; //store the position of the user's account in the array
             }
         }
 
+        //output original information
         System.out.println("Your user ID is: "+employee_id);
         System.out.println("Your current PIN is: "+accountData[account_position][ACCOUNT_PIN_INDEX]);
         System.out.println(); //blank line
 
+        //ask user for new PIN
         System.out.println("Enter a new 4-digit PIN:");
         do{
             System.out.print("Pin: ");
             new_pin = scan.nextLine();
 
+            //check if new_pin has 4 digits
             if((new_pin.length() == 4) && (new_pin.matches("\\d{4}"))){
                 valid_pin = true;
             } else {
@@ -1332,15 +1387,17 @@ public class HotelSystem {
         } while(!valid_pin);
         System.out.println();
 
+        //change the PIN of the user's account
         accountData[account_position][ACCOUNT_PIN_INDEX] = new_pin;
 
+        //output new information
         System.out.println("PIN successfully changed.");
         System.out.println("Your user ID is: "+employee_id);
         System.out.println("Your new PIN is: "+accountData[account_position][ACCOUNT_PIN_INDEX]);
         System.out.println(); //blank line
     }
 
-            /*
+    /*
     Method: deleteRoom
     Name: Noah Hur (edited by Ryan)
     Dates worked on: 2024-05-24,
