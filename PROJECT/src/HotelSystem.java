@@ -104,8 +104,7 @@ public class HotelSystem {
                     case 11:
                         //Delete Rooms
                         if(isAdmin){
-                            //NOT YET IMPLEMENTED
-                            System.out.println("NOT YET IMPLEMENTED");
+                            deleteRoom(roomData);
                         }
                         break;
                 }
@@ -1339,5 +1338,73 @@ public class HotelSystem {
         System.out.println("Your user ID is: "+employee_id);
         System.out.println("Your new PIN is: "+accountData[account_position][ACCOUNT_PIN_INDEX]);
         System.out.println(); //blank line
+    }
+
+            /*
+    Method: deleteRoom
+    Name: Noah Hur
+    Dates worked on: 2024-05-24,
+    Work done:
+    */
+    public static String[][] deleteRoom(String[][] roomData) {
+        Scanner sc = new Scanner(System.in);
+        boolean roomVerify = false;
+        String roomDelete;
+        String[][] temp_roomData;
+        int roomCount = 0;
+        int validRoom = -1;
+
+        System.out.println("Enter room number to delete (enter 0 to return to main menu): ");
+        roomDelete = sc.nextLine();
+
+        if (roomDelete.equals(0)) {
+            roomVerify = true;
+        }
+
+        for (int i = 0; i <= roomData.length - 1; i++) {
+            if (roomDelete.equals(roomData[i][0])) ;
+            {
+                roomVerify = true;
+            }
+        }
+
+        if (roomVerify == false) {
+            do {
+                System.out.println("Invalid room number, enter new room number to delete");
+                roomDelete = sc.nextLine();
+
+                for (int i = 0; i <= roomData.length - 1; i++) {
+                    if (roomDelete.equals(roomData[i][0])) ;
+                    {
+                        roomVerify = true;
+                    }
+                }
+            } while (roomVerify == false);
+        }
+
+        if (roomVerify == true && roomDelete.equals(0)) {
+            return roomData;
+        } else {
+            for (int i = 0; i <= roomData.length - 1; i++) {
+                if (roomData[i][0].equals(roomDelete)) {
+                    roomCount += 1;
+                }
+            }
+
+            temp_roomData = new String[roomData.length - roomCount][5];
+
+            for (int i = 0; i <= temp_roomData.length - 1; i++) {
+                do {
+                    validRoom++;
+
+                    if (!roomDelete.equals(roomData[validRoom][0])) {
+                        for (int n = 0; n <= 5; n++) {
+                            temp_roomData[i][n] = roomData[validRoom][n];
+                        }
+                    }
+                } while (roomDelete.equals(roomData[validRoom][0]));
+            }
+            return temp_roomData;
+        }
     }
 }
