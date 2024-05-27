@@ -1455,7 +1455,7 @@ public class HotelSystem {
 
             //checks if room is valid and counts amount of times room appears
             for (int i = 0; i < roomData.length; i++) {
-                if (roomDelete.equals(roomData[i][RES_DATA])){
+                if (roomDelete.equals(roomData[i][RES_ROOM])){
                     roomVerify = true;
                     roomCount += 1;
                 }
@@ -1471,7 +1471,7 @@ public class HotelSystem {
         System.out.println(); //blank line
 
         //initialise temp_roomData with a size less than roomData by the amount of times the specified room is found
-        temp_roomData = new String[roomData.length - roomCount][RES_DATA];
+        temp_roomData = new String[roomData.length - roomCount][RESERVATION_ELEMENT_COUNT];
 
         //fill temp_roomData with roomData's information excluding the rooms to be deleted
         for (int i = 0; i < roomData.length; i++) {
