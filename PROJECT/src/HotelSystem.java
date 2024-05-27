@@ -1,7 +1,6 @@
 /*
 djfjsjgsfjkj
 */
-import jdk.jshell.spi.ExecutionControl;
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -21,7 +20,7 @@ public class HotelSystem {
     static final int RES_EMPL_ID = 4;
     static final int RESERVATION_ELEMENT_COUNT = 5;
 
-    public static void main(String[] args) throws ExecutionControl.NotImplementedException {
+    public static void main(String[] args){
 
         //CONSTANTS
         final String ACCOUNT_FILE = "account.txt";
@@ -104,9 +103,7 @@ public class HotelSystem {
                     case 11:
                         // case 11: delete rooms
                         if(isAdmin){
-                            throw new ExecutionControl.NotImplementedException("NOT IMPLEMENTED");
-//                            //NOT YET IMPLEMENTED
-//                            System.out.println("NOT YET IMPLEMENTED");
+                            deleteRoom(roomData);
                         }
                         break;
                 }
@@ -144,7 +141,7 @@ public class HotelSystem {
 
             // count number of lines
             for (file = new BufferedReader(new FileReader(filepath)); file.readLine() != null; ++numOfLines) {
-                // TODO: empty for loops are bad, consider alternatives
+
             }
 
             // reset file and initialize data[][]
@@ -191,7 +188,7 @@ public class HotelSystem {
 
             // count number of lines
             for (file = new BufferedReader(new FileReader(filepath)); file.readLine() != null; ++numOfLines) {
-                // TODO: empty for loops are bad, consider alternatives
+
             }
 
             // initialize data and reset file
@@ -234,8 +231,6 @@ public class HotelSystem {
 
         // update the user
         System.out.println("SAVING DATA...");
-
-        // TODO: consider turning these three try/except blocks into a reusable method
 
         // try to write to reservations
         try {
