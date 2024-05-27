@@ -1400,7 +1400,7 @@ public class HotelSystem {
 
     /*
     Method: deleteRoom
-    Name: Noah Hur (edited by Ryan)
+    Name: Noah Hur
     Dates worked on: 2024-05-24,
     Work done:
     */
