@@ -1,2 +1,2 @@
 000000,admin,admin,1234,
-123456,bob,marley,4000,
+123456,bob,marley,3000,

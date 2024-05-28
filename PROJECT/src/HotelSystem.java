@@ -320,7 +320,9 @@ public class HotelSystem {
         int accountIndex = 0;
 
         do {
+            userPin = "";
             userVerify = false;
+            accountIndex = 0;
             System.out.print("Enter ID\n > ");
             userID = sc.nextLine();
             for (int i = 0; i <= accountData.length - 1; i++) {
