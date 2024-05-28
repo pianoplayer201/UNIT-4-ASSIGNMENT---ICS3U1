@@ -677,6 +677,7 @@ public class HotelSystem {
 
 
         }
+        System.out.println(); //blank line
         //Return the selected option as an int.
         return selectionOption;
     }
@@ -1313,7 +1314,7 @@ public class HotelSystem {
             if(valid_reservation_made){
                 //fill temp_array with roomData's information
                 for(int i = 0; i<roomData.length; i++){
-                    for(int j = 0; j<roomData.length; j++){
+                    for(int j = 0; j<RESERVATION_ELEMENT_COUNT; j++){
                         temp_array[i][j] = roomData[i][j];
                     }
                 }
