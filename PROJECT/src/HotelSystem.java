@@ -748,10 +748,13 @@ public class HotelSystem {
         //variables
         boolean valid_date = false;
         boolean room_found = false;
+        boolean already_displayed = false;
         int month = 0;
         int day = 0;
         int year = 0;
         String date = "";
+        String[] displayed_rooms;
+        int displayed_count = 0;
 
         //ask for date
         System.out.println("Enter the date to check.");
@@ -780,18 +783,33 @@ public class HotelSystem {
             }
         } while(!valid_date);
 
+        //output available rooms
         System.out.println(); //blank line
         System.out.println("Available rooms on "+date+":");
 
+        //initialise displayed_rooms' size as the number of rooms in roomData
+        displayed_rooms = new String[roomData.length];
+
         for(int i = 0; i<roomData.length; i++){
-            if(!roomData[i][RES_DATE].equals(date)){
+            already_displayed = false;
+            //loop through displayed rooms. if the room to be displayed is found, set already_displayed to true
+            for(int j = 0; j<displayed_count; j++){
+                if (displayed_rooms[j].equals(roomData[i][RES_ROOM])) {
+                    already_displayed = true;
+                }
+            }
+
+            //if there is a room not reserved on this date and has not already been displayed, print it
+            if((!roomData[i][RES_DATE].equals(date)) && (!already_displayed)){
                 room_found = true;
+                displayed_rooms[displayed_count] = roomData[i][RES_ROOM]; //put the room number outputted into displayed_rooms
+                displayed_count++;
                 System.out.println("Room #: "+roomData[i][RES_ROOM]);
                 System.out.println(); //blank line
             }
         }
         if(!room_found){
-           System.out.println("No rooms available on this date.");
+            System.out.println("No rooms available on this date.");
             System.out.println(); //blank line
         }
     }
